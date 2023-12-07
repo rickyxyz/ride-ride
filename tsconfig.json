@@ -23,7 +23,9 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.json",
     ".eslintrc.cjs",
     ".prettierrc.cjs",
     "vite.config.ts",

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+}
+
+h1,
+h2,
+h3,
+p,
+span,
+a,
+div,
+section,
+article,
+main,
+footer,
+header {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+}
+
+p {
+  font-size: 18px;
+}
