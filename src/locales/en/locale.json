@@ -1,3 +1,9 @@
 {
-  "Hello World": "English"
+  "language": "english",
+  "language_code": "en",
+  "home": "home",
+  "tour": "tour",
+  "bike": "bike",
+  "booking": "booking",
+  "contact": "contact"
 }

@@ -1,3 +1,9 @@
 {
-  "Hello World": "Indonesia"
+  "language": "indonesian",
+  "language_code": "id",
+  "home": "beranda",
+  "tour": "tur",
+  "bike": "sepeda",
+  "booking": "booking",
+  "contact": "kontak"
 }
