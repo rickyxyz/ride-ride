@@ -1,6 +1,7 @@
 {
   "language": "english",
-  "language_code": "en",
+  "language_key": "en",
+  "language_code": "us",
   "home": "home",
   "tour": "tour",
   "bike": "bike",
