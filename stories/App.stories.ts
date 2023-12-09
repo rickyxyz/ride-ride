@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import App from '../src/App';
 
 const meta = {
-  title: 'App page',
+  title: 'Content/App',
   component: App,
   parameters: {
     layout: 'fullscreen',
@@ -13,4 +13,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AppPage: Story = {};
+export const Main: Story = {};

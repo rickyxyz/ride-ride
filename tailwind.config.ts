@@ -11,6 +11,7 @@ const config: Config = {
         h2: '40px',
         h3: '28px',
         h4: '23px',
+        hero: '72px',
       },
       colors: {
         white: '#FFFFFF',

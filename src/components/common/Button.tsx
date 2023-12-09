@@ -10,7 +10,7 @@ function Button({ text, style = 'primary', className, onClick }: ButtonProps) {
     <button
       className={`${className} ${
         style === 'primary'
-          ? 'border-orange bg-orange text-white hover:bg-white hover:text-orange'
+          ? 'border-orange bg-orange text-white hover:shadow-md hover:brightness-110'
           : 'border-black bg-black text-white hover:bg-white hover:text-black'
       } flex h-11 max-w-fit items-center justify-center rounded-lg border-2 px-4 py-2 text-p font-bold transition duration-100`}
       onClick={onClick}
