@@ -4,7 +4,7 @@ import hero_mobile from '/hero-mobile-home.webp';
 
 function App() {
   const dividerClass =
-    'lg:after:absolute lg:after:-bottom-12 lg:after:left-0 lg:after:h-28 lg:after:w-full lg:after:skew-y-3';
+    'relative lg:before:absolute lg:before:-top-12 lg:before:left-0 lg:before:h-24 lg:before:w-full lg:before:skew-y-3 pt-12';
 
   return (
     <main>
@@ -22,20 +22,40 @@ function App() {
         }
       `}</style>
       <section
-        className={`hero_image ${dividerClass} relative bg-contain bg-no-repeat p-5 md:h-[750px] md:px-[11%] md:py-[9%] lg:after:bg-white`}
+        className={`hero_image flex h-[300px] w-full flex-col items-center bg-contain bg-no-repeat p-4 md:h-[850px] md:p-10 md:pt-[9%]`}
       >
-        <div className="flex w-max flex-col items-end gap-3">
-          <h1 className="md:font-hero font-hero-sm">
-            Explore the city
-            <br />
-            with a bike
-          </h1>
-          <p>Best prices, best bikes</p>
-          <Button
-            onClick={() => console.log('a')}
-            text="Rent a bike"
-            className="mt-6"
-          />
+        <div className="w-full max-w-screen-2xl">
+          <div className="flex w-fit flex-col items-end">
+            <h1>
+              Explore the city
+              <br />
+              with a bike
+            </h1>
+            <p>Best prices, best bikes</p>
+            <Button
+              onClick={() => console.log('a')}
+              text="Rent a bike"
+              className="mt-6"
+            />
+          </div>
+        </div>
+      </section>
+      <section
+        className={`p-10 pb-16 ${dividerClass} flex w-full flex-col items-center bg-white lg:before:bg-white `}
+      >
+        <div className="grid w-full max-w-screen-2xl grid-cols-2">
+          <div>
+            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+              Rent a Bike Now
+            </h2>
+            <span className="text-big">A Bike for Everyone</span>
+            <p>
+              Discover your ideal ride at our bicycle rental shop. With a
+              diverse range of models in various sizes and types, we have the
+              perfect bike for everyone. Find the one that suits your needs and
+              start your biking journey with us!
+            </p>
+          </div>
         </div>
       </section>
     </main>

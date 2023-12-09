@@ -20,37 +20,69 @@
   }
 
   h1 {
-    @apply text-h1 font-extrabold;
-  }
-
-  h2 {
-    @apply text-h2 font-bold;
-  }
-
-  h3 {
-    @apply text-h3 font-semibold;
-  }
-
-  h4 {
-    @apply text-h4 font-bold;
-  }
-
-  .font-hero {
-    @apply text-hero font-bold;
+    @apply font-bold;
+    font-size: 72px;
     letter-spacing: -3px;
     word-spacing: -2px;
     line-height: 76px;
   }
 
-  .font-hero-sm {
+  h2 {
     @apply font-bold;
     font-size: 40px;
-    letter-spacing: -3px;
-    word-spacing: -2px;
-    line-height: 56px;
   }
 
-  .line-before {
-    @apply before:;
+  h3 {
+    @apply font-semibold;
+    font-size: 28px;
+  }
+
+  h4 {
+    @apply font-bold;
+    font-size: 23px;
+  }
+
+  .text-big {
+    @apply font-bold;
+    font-size: 52px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h1,
+    h2,
+    h3,
+    p,
+    span,
+    a,
+    div,
+    section,
+    article,
+    main,
+    footer,
+    header {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+    }
+
+    h1 {
+      font-size: 40px;
+      line-height: 56px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+
+    .text-big {
+      font-size: 33px;
+    }
   }
 }
