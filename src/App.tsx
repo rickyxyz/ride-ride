@@ -1,10 +1,16 @@
 import Button from './components/common/Button';
+import CardBike from './components/common/CardBike';
 import hero_desktop from '/hero-desktop-home.webp';
 import hero_mobile from '/hero-mobile-home.webp';
+import bike from '/bike-1.png';
+import town from '/tour-town.jpg';
+import lake from '/tour-lake.jpg';
 
 function App() {
-  const dividerClass =
+  const dividerClassBefore =
     'relative lg:before:absolute lg:before:-top-12 lg:before:left-0 lg:before:h-24 lg:before:w-full lg:before:skew-y-3 pt-12';
+  const dividerClassAfter =
+    'relative lg:after:absolute lg:after:-bottom-12 lg:after:left-0 lg:after:h-24 lg:after:w-full lg:after:skew-y-3 pt-12';
 
   return (
     <main>
@@ -41,19 +47,103 @@ function App() {
         </div>
       </section>
       <section
-        className={`p-10 pb-16 ${dividerClass} flex w-full flex-col items-center bg-white lg:before:bg-white `}
+        className={`p-10 pb-16 ${dividerClassBefore} flex w-full flex-col items-center bg-white lg:before:bg-white`}
       >
-        <div className="grid w-full max-w-screen-2xl grid-cols-2">
+        <div className="grid w-full max-w-screen-2xl gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
           <div>
             <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
-              Rent a Bike Now
+              Bike Rental
             </h2>
             <span className="text-big">A Bike for Everyone</span>
             <p>
-              Discover your ideal ride at our bicycle rental shop. With a
-              diverse range of models in various sizes and types, we have the
-              perfect bike for everyone. Find the one that suits your needs and
-              start your biking journey with us!
+              With a diverse range of models in various sizes and types, we have
+              the perfect bike for everyone.
+            </p>
+          </div>
+          <div className="relative flex flex-col items-center justify-center gap-3">
+            <CardBike
+              code="mb1"
+              name="climb"
+              size="mini"
+              image={bike}
+              className="absolute -left-10 top-1/2 z-20 -translate-y-1/2 scale-75 blur-[2px]"
+            />
+            <CardBike
+              code="mb1"
+              name="center"
+              size="mini"
+              image={bike}
+              className="z-30 w-4/6"
+            />
+            <CardBike
+              code="mb1"
+              name="climb"
+              size="mini"
+              image={bike}
+              className="absolute -right-10 top-1/2 z-20 -translate-y-1/2 scale-75 blur-[2px]"
+            />
+            <ol className="flex flex-row items-center gap-2">
+              <li className="h-2 w-2 rounded-full bg-black" />
+              <li className="h-3 w-3 rounded-full bg-orange" />
+              <li className="h-2 w-2 rounded-full bg-black" />
+            </ol>
+          </div>
+        </div>
+      </section>
+      <section
+        className={`p-10 ${dividerClassBefore} ${dividerClassAfter} flex w-full flex-col items-center bg-ghost_white lg:before:bg-ghost_white lg:after:bg-ghost_white`}
+      >
+        <div className="grid w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
+          <div>
+            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+              Guided Tour
+            </h2>
+            <span className="text-big">Discover new area</span>
+            <p>
+              Embark on an unforgettable 2-hour city tour with our expert guide,
+              exploring both iconic landmarks and hidden gems, such as:
+              <ul className="my-2 ml-8 list-disc">
+                <li>The Majestic Tower</li>
+                <li>The Serene Deep Lake</li>
+                <li>The Lush Green Park</li>
+              </ul>
+              Experience the city&apos;s beauty like never before!
+            </p>
+          </div>
+          <div className="relative flex flex-row items-center justify-center">
+            <div className="z-40 lg:-translate-x-1 lg:translate-y-20">
+              <img
+                src={town}
+                alt="tour of the city"
+                className="w-10/12 overflow-hidden rounded-xl lg:h-[500px] lg:w-auto"
+              />
+            </div>
+            <div className="absolute translate-x-[10vw] scale-90 lg:relative lg:-translate-x-32 lg:-translate-y-10 lg:scale-100">
+              <img
+                src={lake}
+                alt="tour of the bridge"
+                className="w-10/12 overflow-hidden rounded-xl blur-[2px] lg:h-[600px] lg:w-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        className={`mt-16 flex w-full flex-col items-center bg-white p-10 pb-16 lg:before:bg-white`}
+      >
+        <div className="grid h-[900px] w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
+          <div>
+            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+              Our Shops
+            </h2>
+            <span className="text-big">
+              Book online,
+              <br />
+              Pickup anywhere
+            </span>
+            <p>
+              Ready to roll? Book your bike online and grab it at any of our
+              store.
             </p>
           </div>
         </div>

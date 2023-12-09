@@ -34,8 +34,7 @@
     "tailwind.config.ts",
     "playwright.config.ts",
     "stories",
-    "tests",
-    "tests/e2e"
+    "tests"
   ],
   "exclude": ["node_modules", "dist", "storybook-static"]
 }

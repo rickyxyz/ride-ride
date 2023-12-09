@@ -6,7 +6,7 @@ const config: Config = {
     extend: {
       colors: {
         white: '#FFFFFF',
-        ghost_white: '#FBFBFF',
+        ghost_white: '#FAFAFC',
         orange: '#FF7D2B',
         almost_black: '#0F082D',
         black: '#070216',
