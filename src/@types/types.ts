@@ -9,7 +9,7 @@ export const languagesFlag: Record<I18nLang, string> = {
   id: 'id',
 };
 
-export interface HeaderLink {
+export interface Link {
   name: string;
   i18nKey: I18nKey;
   href: string;
