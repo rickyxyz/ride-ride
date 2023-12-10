@@ -16,7 +16,7 @@ const headerLinks: Link[] = [
   {
     name: 'bike',
     i18nKey: 'bike',
-    href: '/bikes',
+    href: '/bike',
   },
   {
     name: 'tour',
@@ -24,9 +24,9 @@ const headerLinks: Link[] = [
     href: '/tour',
   },
   {
-    name: 'booking',
-    i18nKey: 'booking',
-    href: '/booking',
+    name: 'about us',
+    i18nKey: 'about us',
+    href: '/about',
   },
   {
     name: 'contact',

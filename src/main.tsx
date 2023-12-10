@@ -8,6 +8,9 @@ import './global.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Footer from './components/Footer.tsx';
 import PageBikes from './pages/Bikes.tsx';
+import PageTours from './pages/Tours.tsx';
+import PageBike from './pages/BookBike.tsx';
+import PageBookTour from './pages/BookTour.tsx';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +18,20 @@ const router = createBrowserRouter([
     element: <PageHome />,
   },
   {
-    path: '/bikes',
+    path: '/bike',
     element: <PageBikes />,
+  },
+  {
+    path: '/bike/:id',
+    element: <PageBike />,
+  },
+  {
+    path: '/tour',
+    element: <PageTours />,
+  },
+  {
+    path: '/tour/:id',
+    element: <PageBookTour />,
   },
 ]);
 

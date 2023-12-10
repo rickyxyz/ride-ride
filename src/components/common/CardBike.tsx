@@ -31,19 +31,8 @@ function CardBike({
           <span className="font-semibold text-orange">{`$${price}/day`}</span>
         </span>
         <p>{description}</p>
-        <span className="mt-6 flex flex-row gap-2">
-          <ButtonLink
-            text="Learn More"
-            style="secondary"
-            target={`bike/${code}`}
-            className="flex-1"
-          />
-          <ButtonLink
-            text="Book Now"
-            style="primary"
-            target={`bike/${code}`}
-            className="flex-1"
-          />
+        <span className="mt-6 flex flex-col justify-end gap-2 sm:flex-row">
+          <ButtonLink text="Book Now" style="primary" target={`bike/${code}`} />
         </span>
       </div>
     </div>

@@ -39,7 +39,7 @@ function Footer() {
 
   return (
     <footer
-      className={`relative mt-16 flex w-full flex-col items-start justify-center bg-almost_black px-8 pb-4 pt-32 font-light text-ghost_white md:items-center ${separatorStyle}`}
+      className={`relative flex w-full flex-col items-start justify-center bg-almost_black px-8 pb-4 pt-32 font-light text-ghost_white md:items-center ${separatorStyle}`}
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr,8fr,8fr]">
         <a href="/">
