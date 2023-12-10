@@ -22,7 +22,7 @@ function CardBike({
 }: CardBikeProps) {
   const cardFull = (
     <div
-      className={`w-80 rounded-sm border border-almost_black bg-white p-4 ${className}`}
+      className={`w-full max-w-md rounded-sm border border-almost_black bg-white p-4 ${className}`}
     >
       <img src={image} alt={name} className="mb-2 h-auto w-full" />
       <div className="flex flex-col gap-1">
