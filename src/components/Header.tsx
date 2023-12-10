@@ -84,7 +84,7 @@ function _LanguageSwitcher({
       </button>
       {isDropdownVisible && (
         <div
-          className={`border-px left mt-2 w-full border-black bg-gray-100 p-2 ${
+          className={`border-px left bg-gray-100 mt-2 w-full border-black p-2 ${
             mode === 'desktop' ? 'absolute shadow-md' : ''
           }`}
         >

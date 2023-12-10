@@ -7,6 +7,7 @@ const config: Config = {
       colors: {
         white: '#FFFFFF',
         ghost_white: '#FAFAFC',
+        gray: '#EFEFEF',
         orange: '#FF7D2B',
         almost_black: '#0F082D',
         black: '#070216',
