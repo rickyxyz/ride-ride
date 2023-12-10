@@ -4,7 +4,6 @@ import { ButtonLink } from './Button';
 interface CardBikeProps {
   code: string;
   name: string;
-  type: string;
   description: string;
   image: string;
   price: number;
@@ -15,7 +14,6 @@ interface CardBikeProps {
 function CardBike({
   code,
   name,
-  type,
   description,
   image,
   price,
@@ -37,13 +35,13 @@ function CardBike({
           <ButtonLink
             text="Learn More"
             style="secondary"
-            target={'#'}
+            target={`bike/${code}`}
             className="flex-1"
           />
           <ButtonLink
             text="Book Now"
             style="primary"
-            target={'#'}
+            target={`bike/${code}`}
             className="flex-1"
           />
         </span>
@@ -58,7 +56,7 @@ function CardBike({
       <img src={image} alt={name} className="mb-2 h-auto w-full" />
       <div className="flex flex-col gap-1">
         <span className="flex flex-row items-center justify-center">
-          <a href="#" className="text-orange underline">
+          <a href={`bike/${code}`} className="text-orange underline">
             <p>{name}</p>
           </a>
         </span>

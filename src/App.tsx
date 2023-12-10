@@ -39,6 +39,7 @@ function App() {
             </h1>
             <p>Best prices, best bikes</p>
             <Button
+              // eslint-disable-next-line no-console
               onClick={() => console.log('a')}
               text="Rent a bike"
               className="mt-6"
@@ -51,10 +52,10 @@ function App() {
       >
         <div className="grid w-full max-w-screen-2xl gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
           <div>
-            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+            <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Bike Rental
             </h2>
-            <span className="text-big">A Bike for Everyone</span>
+            <span className="text-big">Find your bike</span>
             <p>
               With a diverse range of models in various sizes and types, we have
               the perfect bike for everyone.
@@ -66,6 +67,8 @@ function App() {
               name="climb"
               size="mini"
               image={bike}
+              description="Bike"
+              price={1}
               className="absolute -left-10 top-1/2 z-20 -translate-y-1/2 scale-75 blur-[2px]"
             />
             <CardBike
@@ -73,6 +76,8 @@ function App() {
               name="center"
               size="mini"
               image={bike}
+              description="Bike"
+              price={1}
               className="z-30 w-4/6"
             />
             <CardBike
@@ -80,7 +85,9 @@ function App() {
               name="climb"
               size="mini"
               image={bike}
+              description="Bike"
               className="absolute -right-10 top-1/2 z-20 -translate-y-1/2 scale-75 blur-[2px]"
+              price={1}
             />
             <ol className="flex flex-row items-center gap-2">
               <li className="h-2 w-2 rounded-full bg-black" />
@@ -95,7 +102,7 @@ function App() {
       >
         <div className="grid w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
           <div>
-            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+            <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Guided Tour
             </h2>
             <span className="text-big">Discover new area</span>
@@ -133,7 +140,7 @@ function App() {
       >
         <div className="grid h-[900px] w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
           <div>
-            <h2 className="relative text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
+            <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Our Shops
             </h2>
             <span className="text-big">
