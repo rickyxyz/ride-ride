@@ -5,19 +5,16 @@ pre-commit:
       priority: 4
       tag: lint
       glob: '*.{html,json,yml,yaml}'
-      exclude: '^.*'
       run: npx prettier --write {staged_files}
     lint:css:
       priority: 3
       tag: lint
       glob: '*.{css}'
-      exclude: '^.*'
       run: npx prettier --write {staged_files}
     lint:js:
       priority: 1
       tag: lint
       glob: '*.{js,ts,jsx,tsx}'
-      exclude: '^.*'
       run: npx prettier --write {staged_files} && npm run lint --fix {staged_files}
     test:unit:
       priority: 2
