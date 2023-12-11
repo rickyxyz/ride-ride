@@ -34,7 +34,8 @@
     "tailwind.config.ts",
     "playwright.config.ts",
     "stories",
-    "tests"
+    "tests",
+    "src/pages/About.tsx"
   ],
   "exclude": ["node_modules", "dist", "storybook-static"]
 }

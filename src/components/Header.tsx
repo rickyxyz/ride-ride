@@ -24,14 +24,14 @@ const headerLinks: Link[] = [
     href: '/tour',
   },
   {
+    name: 'stores',
+    i18nKey: 'stores',
+    href: '/stores',
+  },
+  {
     name: 'about us',
     i18nKey: 'about us',
     href: '/about',
-  },
-  {
-    name: 'contact',
-    i18nKey: 'contact',
-    href: '/contact',
   },
 ];
 

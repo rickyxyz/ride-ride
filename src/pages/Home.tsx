@@ -2,7 +2,7 @@ import Button, { ButtonLink } from '../components/common/Button';
 import CardBike from '../components/common/CardBike';
 import hero_desktop from '/hero-desktop-home.webp';
 import hero_mobile from '/hero-mobile-home.webp';
-import store from '/stores.jpg';
+import store from '/stores.webp';
 import bike from '/bike-1.png';
 import town from '/tour-town.jpg';
 import lake from '/tour-lake.jpg';
@@ -44,7 +44,7 @@ function PageHome() {
         className={`hero_image flex h-[300px] w-full flex-col items-center bg-contain bg-no-repeat p-4 md:h-[850px] md:p-10 md:pt-[9%]`}
       >
         <div className="w-full max-w-screen-2xl">
-          <div className="flex w-fit flex-col items-end">
+          <div className="flex w-fit flex-col items-end gap-2">
             <h1>
               Explore the city
               <br />
@@ -64,7 +64,7 @@ function PageHome() {
         className={`p-10 pb-16 ${dividerClassBefore} flex w-full flex-col items-center bg-white lg:before:bg-white`}
       >
         <div className="grid w-full max-w-screen-2xl gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
-          <div>
+          <div className="flex flex-col gap-2">
             <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Bike Rental
             </h2>
@@ -73,6 +73,11 @@ function PageHome() {
               With a diverse range of models in various sizes and types, we have
               the perfect bike for everyone.
             </p>
+            <ButtonLink
+              text={'Book Now'}
+              target={'/bike'}
+              className="mt-8 self-start"
+            />
           </div>
           <div className="relative flex flex-col items-center justify-center gap-3">
             <CardBike
@@ -114,7 +119,7 @@ function PageHome() {
         className={`p-10 ${dividerClassBefore} ${dividerClassAfter} flex w-full flex-col items-center bg-ghost_white lg:before:bg-ghost_white lg:after:bg-ghost_white`}
       >
         <div className="grid w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
-          <div>
+          <div className="flex flex-col gap-2">
             <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Guided Tour
             </h2>
@@ -129,6 +134,11 @@ function PageHome() {
               </ul>
               Experience the city&apos;s beauty like never before!
             </p>
+            <ButtonLink
+              text={'Book Now'}
+              target={'/bike'}
+              className="mt-8 self-start"
+            />
           </div>
           <div className="relative flex flex-row items-center justify-center">
             <div className="z-40 lg:-translate-x-1 lg:translate-y-20">

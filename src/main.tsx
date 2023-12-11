@@ -13,6 +13,8 @@ import PageBike from './pages/BookBike.tsx';
 import PageBookTour from './pages/BookTour.tsx';
 import PageOrder from './pages/Order.tsx';
 import PageCheckout from './pages/Checkout.tsx';
+import PageAbout from './pages/About.tsx';
+import PageStores from './pages/Stores.tsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
   {
     path: '/order',
     element: <PageOrder />,
+  },
+  {
+    path: '/about',
+    element: <PageAbout />,
+  },
+  {
+    path: '/stores',
+    element: <PageStores />,
   },
 ]);
 
