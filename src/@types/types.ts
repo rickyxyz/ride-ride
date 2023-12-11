@@ -14,3 +14,11 @@ export interface Link {
   i18nKey: I18nKey;
   href: string;
 }
+
+export interface Bicycle {
+  code: string;
+  name: string;
+  image: string;
+  description?: string;
+  price: number;
+}

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CardBike from '../../src/components/common/CardBike';
-import bike from '../assets/bike-1.png';
+import bike_1 from '../assets/bike-1.png';
 
 const meta = {
   title: 'Component/Card Bike',
@@ -10,17 +10,21 @@ const meta = {
   },
 } satisfies Meta<typeof CardBike>;
 
+const bike = {
+  code: 'b1',
+  name: 'mountain bike',
+  image: bike_1,
+  description: 'a',
+  price: 12,
+};
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const CardBikeFull: Story = {
   args: {
-    code: 'mb1',
-    name: 'climb',
-    description: 'perfect for a more adventurous tour',
-    image: bike,
-    price: 12,
+    bike: bike,
     size: 'full',
   },
 };
@@ -32,11 +36,7 @@ export const CardBikeMini: Story = {
     </div>
   ),
   args: {
-    code: 'mb1',
-    name: 'climb',
-    description: 'perfect for a more adventurous tour',
-    image: bike,
-    price: 12,
+    bike: bike,
     size: 'mini',
   },
 };

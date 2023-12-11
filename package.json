@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "flag-icons": "^7.0.3",
+    "framer-motion": "^10.16.16",
     "i18next": "^23.7.8",
     "i18next-browser-languagedetector": "^7.2.0",
     "localforage": "^1.10.0",

@@ -1,6 +1,6 @@
 import Button from '../components/common/Button';
 import OrderSummary from '../components/common/OrderSummary';
-import bike from '/bike-1.png';
+import bike from '/bike-1.webp';
 
 function PageBookBike() {
   return (

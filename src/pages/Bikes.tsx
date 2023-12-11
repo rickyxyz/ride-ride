@@ -1,6 +1,6 @@
 import CardBike from '../components/common/CardBike';
 import hero from '/hero-tours.png';
-import bike from '/bike-1.png';
+import { BICYCLE } from '../constants/Bicycles';
 
 function PageBikes() {
   return (
@@ -32,47 +32,10 @@ function PageBikes() {
       <section
         className={`flex w-full flex-col items-center bg-white p-4 pb-16 md:p-10`}
       >
-        <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-x-4 gap-y-5 pt-8 md:grid-cols-2 lg:grid-cols-4">
-          <CardBike
-            code="a"
-            description="a"
-            image={bike}
-            name="c"
-            price={1}
-            size="full"
-          />
-          <CardBike
-            code="a"
-            description="a"
-            image={bike}
-            name="c"
-            price={1}
-            size="full"
-          />
-          <CardBike
-            code="a"
-            description="a"
-            image={bike}
-            name="c"
-            price={1}
-            size="full"
-          />
-          <CardBike
-            code="a"
-            description="a"
-            image={bike}
-            name="c"
-            price={1}
-            size="full"
-          />
-          <CardBike
-            code="a"
-            description="a"
-            image={bike}
-            name="c"
-            price={1}
-            size="full"
-          />
+        <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-x-4 gap-y-5 pb-16 pt-8 md:grid-cols-2 md:pb-32 lg:grid-cols-4">
+          {BICYCLE.map((bike) => (
+            <CardBike bike={bike} size="full" key={`bike-${bike.code}`} />
+          ))}
         </div>
       </section>
     </main>

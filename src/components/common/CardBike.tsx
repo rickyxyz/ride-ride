@@ -1,25 +1,16 @@
 import { ComponentProps } from 'react';
 import { ButtonLink } from './Button';
+import { Bicycle } from '../../@types/types';
 
 interface CardBikeProps {
-  code: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
+  bike: Bicycle;
   size: 'mini' | 'full';
   className?: ComponentProps<'div'>['className'];
 }
 
-function CardBike({
-  code,
-  name,
-  description,
-  image,
-  price,
-  size = 'full',
-  className,
-}: CardBikeProps) {
+function CardBike({ bike, size = 'full', className }: CardBikeProps) {
+  const { code, name, description, image, price } = bike;
+
   const cardFull = (
     <div
       className={`w-full max-w-md rounded-sm border border-almost_black bg-white p-4 ${className}`}
@@ -42,7 +33,11 @@ function CardBike({
     <div
       className={`w-4/5 rounded-sm border border-almost_black bg-white p-4 ${className}`}
     >
-      <img src={image} alt={name} className="mb-2 h-auto w-full" />
+      <img
+        src={image}
+        alt={name}
+        className="mb-2 h-[100px] w-full object-contain md:h-[400px]"
+      />
       <div className="flex flex-col gap-1">
         <span className="flex flex-row items-center justify-center">
           <a href={`bike/${code}`} className="text-orange underline">
