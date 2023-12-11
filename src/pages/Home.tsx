@@ -75,7 +75,7 @@ function PageHome() {
             the perfect bike for everyone.
           </p>
           <ButtonLink
-            text={'Book Now'}
+            text={'See all bikes'}
             target={'/bike'}
             className="mt-8 self-start"
           />
@@ -104,8 +104,8 @@ function PageHome() {
             Experience the city&apos;s beauty like never before!
           </p>
           <ButtonLink
-            text={'Book Now'}
-            target={'/bike'}
+            text={'See all tours'}
+            target={'/tour'}
             className="mt-8 self-start"
           />
         </div>
