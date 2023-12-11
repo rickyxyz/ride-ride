@@ -43,6 +43,7 @@
     "react-i18next": "^13.5.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.18.0",
+    "react-use-cookie": "^1.4.0",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
