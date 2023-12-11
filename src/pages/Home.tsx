@@ -1,7 +1,8 @@
-import Button from '../components/common/Button';
+import Button, { ButtonLink } from '../components/common/Button';
 import CardBike from '../components/common/CardBike';
 import hero_desktop from '/hero-desktop-home.webp';
 import hero_mobile from '/hero-mobile-home.webp';
+import store from '/stores.jpg';
 import bike from '/bike-1.png';
 import town from '/tour-town.jpg';
 import lake from '/tour-lake.jpg';
@@ -20,10 +21,22 @@ function PageHome() {
           background-size: 100% auto;
           background-position: top right;
         }
+        .store_image {
+          background: white;
+          background-size: 100% auto;
+          background-position: top right;
+          background-size: cover;
+        }
         @media screen and (min-width: 1024px){
           .hero_image {
             background: linear-gradient(90deg, rgba(251,251,255,0.8) 50%, rgba(0,0,0,0.3) 81%), url(${hero_desktop}) no-repeat;
             background-position: right;
+          }
+          .store_image {
+            background: linear-gradient(180deg, rgba(251,251,255,0.2) 0%, rgba(172,172,172,0.2) 100%), url(${store}) no-repeat;
+            background-size: 100% auto;
+            background-position: top right;
+            background-size: cover;
           }
         }
       `}</style>
@@ -136,10 +149,12 @@ function PageHome() {
         </div>
       </section>
       <section
-        className={`mt-16 flex w-full flex-col items-center bg-white p-10 pb-16 lg:before:bg-white`}
+        className={
+          'store_image flex w-full flex-col items-center bg-white p-10 pb-16 md:pt-32 lg:before:bg-white'
+        }
       >
-        <div className="grid h-[900px] w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 py-10 lg:grid-cols-[4fr,6fr]">
-          <div>
+        <div className="grid w-full max-w-screen-2xl grid-cols-1 gap-x-4 gap-y-10 md:h-[700px] md:pt-16 lg:grid-cols-[4fr,6fr]">
+          <div className="flex flex-col gap-2">
             <h2 className="relative mb-2 text-orange before:absolute before:-left-5 before:top-0 before:h-full before:w-2 before:bg-orange">
               Our Shops
             </h2>
@@ -152,6 +167,11 @@ function PageHome() {
               Ready to roll? Book your bike online and grab it at any of our
               store.
             </p>
+            <ButtonLink
+              text={'Book Now'}
+              target={'/bike'}
+              className="mt-8 self-start"
+            />
           </div>
         </div>
       </section>

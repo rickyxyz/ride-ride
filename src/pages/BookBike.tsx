@@ -4,7 +4,7 @@ import bike from '/bike-1.png';
 
 function PageBookBike() {
   return (
-    <main className="flex grid-cols-1 justify-center bg-ghost_white pt-12 lg:grid-cols-[7fr,3fr]">
+    <main className="flex grid-cols-1 justify-center bg-ghost_white pb-48 pt-12 lg:grid-cols-[7fr,3fr]">
       <div className="grid max-w-7xl grid-cols-[3fr,7fr,1px,3fr] gap-x-2 bg-white p-8">
         <div className="flex h-full flex-col gap-4 self-center text-center">
           <h4 className="font-bold">The Climb</h4>

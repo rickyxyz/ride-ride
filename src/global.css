@@ -39,7 +39,7 @@
 
   h4 {
     @apply font-bold;
-    font-size: 23px;
+    font-size: 25px;
   }
 
   .text-big {
@@ -83,7 +83,7 @@
     }
 
     h4 {
-      font-size: 16px;
+      font-size: 20px;
     }
 
     .text-big {

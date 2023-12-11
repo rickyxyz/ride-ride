@@ -11,6 +11,8 @@ import PageBikes from './pages/Bikes.tsx';
 import PageTours from './pages/Tours.tsx';
 import PageBike from './pages/BookBike.tsx';
 import PageBookTour from './pages/BookTour.tsx';
+import PageOrder from './pages/Order.tsx';
+import PageCheckout from './pages/Checkout.tsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: '/tour/:id',
     element: <PageBookTour />,
+  },
+  {
+    path: '/checkout',
+    element: <PageCheckout />,
+  },
+  {
+    path: '/order',
+    element: <PageOrder />,
   },
 ]);
 

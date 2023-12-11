@@ -84,7 +84,7 @@ function _LanguageSwitcher({
       </button>
       {isDropdownVisible && (
         <div
-          className={`border-px left bg-gray-100 mt-2 w-full border-black p-2 ${
+          className={`border-px left bg-gray-100 mt-2 w-full border-black bg-gray p-2 ${
             mode === 'desktop' ? 'absolute shadow-md' : ''
           }`}
         >
@@ -173,7 +173,9 @@ function Header() {
         </ul>
       </nav>
       <span className="relative ml-6 transition duration-75 before:absolute before:-left-6 before:bg-black hover:text-orange lg:before:h-full lg:before:w-0.5">
-        <TbShoppingCart size={24} />
+        <a href="/order">
+          <TbShoppingCart size={24} />
+        </a>
       </span>
       <_LanguageSwitcher className="hidden lg:block" />
       <button
