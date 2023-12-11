@@ -16,8 +16,8 @@ type Story = StoryObj<typeof meta>;
 
 const tour = {
   code: 't1',
-  image: '',
-  name: tour_1,
+  image: tour_1,
+  name: 'Tour of the Lake',
   price: 20,
   description: 'Enjoy the lake',
   duration: '30 minutes',

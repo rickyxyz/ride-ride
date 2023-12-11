@@ -23,7 +23,7 @@ function PageBikes() {
         className={`hero_image flex h-[250px] w-full flex-col p-4 md:h-[500px] md:items-end md:justify-center md:p-10 md:pr-[15%]`}
       >
         <div className="flex w-full max-w-screen-2xl md:justify-end">
-          <div className="flex w-fit flex-col text-white md:items-end">
+          <div className="flex w-fit flex-col gap-2 text-white md:items-end">
             <h1>Our Bikes</h1>
             <p>Pick the right bike for you</p>
           </div>

@@ -1,6 +1,7 @@
 import { ComponentProps } from 'react';
 import { ButtonLink } from './common/Button';
-import { FaClock, FaDollarSign } from 'react-icons/fa';
+import { FaClock } from 'react-icons/fa';
+import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { Tour } from '../@types/types';
 
 interface CardTourProps {
@@ -17,17 +18,14 @@ function CardTour({ tour, className }: CardTourProps) {
       <div className="flex h-80 w-full items-center justify-center overflow-hidden">
         <img src={image} alt={name} className="object-cover" />
       </div>
+      <h2>{name}</h2>
       <div className="flex flex-col gap-3 p-6">
-        <span className="flex flex-row items-center justify-between">
-          <h2>{name}</h2>
-          <span className="font-semibold text-orange">{`$${price}`}</span>
-        </span>
         <span className="flex flex-row gap-6">
           <div className="flex flex-row items-start gap-1">
-            <FaDollarSign />
+            <RiMoneyDollarCircleFill />
             <div className="flex flex-col gap-1">
               <span className="font-semibold leading-none">Price</span>
-              <p>$5/person</p>
+              <p>${price}/person</p>
             </div>
           </div>
           <div className="flex flex-row items-start gap-1">

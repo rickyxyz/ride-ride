@@ -1,4 +1,5 @@
 import hero from '/hero-about.webp';
+import sideImage from '/about-us.webp';
 
 function PageAbout() {
   return (
@@ -31,7 +32,12 @@ function PageAbout() {
         className={`flex w-full flex-col items-center gap-12 bg-white p-4 pb-16 md:p-10`}
       >
         <h2>Who are we?</h2>
-        <div className="grid w-full max-w-7xl grid-cols-2">
+        <div className="grid w-full max-w-7xl grid-cols-1 justify-items-center md:grid-cols-[5fr,4fr]">
+          <img
+            src={sideImage}
+            alt=""
+            className="hidden h-4/6 rounded-xl md:block"
+          />
           <div className="flex flex-col gap-5 text-justify">
             <p>Hey there, fellow riders!</p>
             <p>

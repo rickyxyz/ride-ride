@@ -1,5 +1,5 @@
 import Button, { ButtonLink } from './Button';
-import tour from '/tour-city.jpg';
+import tour from '/tour-town.webp';
 import bike from '/bike-1.webp';
 
 interface OrderSummaryProps {

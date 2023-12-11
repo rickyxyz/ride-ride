@@ -1,6 +1,6 @@
 import Button from '../components/common/Button';
 import OrderSummary from '../components/common/OrderSummary';
-import tour from '/tour-city.jpg';
+import tour from '/tour-town.webp';
 import { FaClock, FaDollarSign } from 'react-icons/fa';
 
 const landmarks = ['a', 'b', 'c'];

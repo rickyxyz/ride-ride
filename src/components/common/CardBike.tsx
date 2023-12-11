@@ -16,11 +16,9 @@ function CardBike({ bike, size = 'full', className }: CardBikeProps) {
       className={`w-full max-w-md rounded-sm border border-almost_black bg-white p-4 ${className}`}
     >
       <img src={image} alt={name} className="mb-2 h-auto w-full" />
-      <div className="flex flex-col gap-1">
-        <span className="flex flex-row items-center justify-between">
-          <h2>{name}</h2>
-          <span className="font-semibold text-orange">{`$${price}/day`}</span>
-        </span>
+      <div className="flex flex-col gap-3">
+        <h2 className="capitalize">{name}</h2>
+        <p className="font-bold">${price}/day</p>
         <p>{description}</p>
         <span className="mt-6 flex flex-col justify-end gap-2 sm:flex-row">
           <ButtonLink text="Book Now" style="primary" target={`bike/${code}`} />
