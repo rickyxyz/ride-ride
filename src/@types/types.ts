@@ -22,3 +22,13 @@ export interface Bicycle {
   description?: string;
   price: number;
 }
+
+export interface Tour {
+  code: string;
+  name: string;
+  image: string;
+  description?: string;
+  price: number;
+  duration: string;
+  landmarks: string[];
+}

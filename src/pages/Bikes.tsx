@@ -1,5 +1,5 @@
 import CardBike from '../components/common/CardBike';
-import hero from '/hero-tours.png';
+import hero from '/hero-tours.webp';
 import { BICYCLE } from '../constants/Bicycles';
 
 function PageBikes() {

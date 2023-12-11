@@ -1,10 +1,10 @@
 import CardTour from '../components/CardTour';
-import hero from '/hero-tour.jpg';
-import tour_lake from '/tour-lake.jpg';
+import { TOUR } from '../constants/Tours';
+import hero from '/hero-tour.webp';
 
 function PageTours() {
   return (
-    <main>
+    <main className="mb-12 md:mb-24">
       <style>{`
         .hero_image {
           background: linear-gradient(180deg, rgb(0,0,0,0.8) 0%, rgb(0,0,0,0.6) 90%), url(${hero}) no-repeat;
@@ -36,42 +36,9 @@ function PageTours() {
         className={`flex w-full flex-col items-center bg-white p-4 pb-16 md:p-10`}
       >
         <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-6 pt-8 md:grid-cols-2 lg:grid-cols-3">
-          <CardTour
-            code="a"
-            duration="a"
-            image={tour_lake}
-            name="lake"
-            price={1}
-            landmarks={['a', 'b']}
-            start="a"
-          />
-          <CardTour
-            code="a"
-            duration="a"
-            image={tour_lake}
-            name="lake"
-            price={1}
-            landmarks={['a', 'b']}
-            start="a"
-          />
-          <CardTour
-            code="a"
-            duration="a"
-            image={tour_lake}
-            name="lake"
-            price={1}
-            landmarks={['a', 'b']}
-            start="a"
-          />
-          <CardTour
-            code="a"
-            duration="a"
-            image={tour_lake}
-            name="lake"
-            price={1}
-            landmarks={['a', 'b']}
-            start="a"
-          />
+          {TOUR.map((tour) => (
+            <CardTour key={`tour-${tour.code}`} tour={tour} />
+          ))}
         </div>
       </section>
     </main>

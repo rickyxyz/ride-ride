@@ -1,27 +1,15 @@
 import { ComponentProps } from 'react';
 import { ButtonLink } from './common/Button';
 import { FaClock, FaDollarSign } from 'react-icons/fa';
+import { Tour } from '../@types/types';
 
 interface CardTourProps {
-  code: string;
-  name: string;
-  duration: string;
-  image: string;
-  price: number;
-  start: string;
-  landmarks: string[];
+  tour: Tour;
   className?: ComponentProps<'div'>['className'];
 }
 
-function CardTour({
-  code,
-  name,
-  image,
-  price,
-  duration,
-  landmarks,
-  className,
-}: CardTourProps) {
+function CardTour({ tour, className }: CardTourProps) {
+  const { code, name, image, price, duration, landmarks } = tour;
   return (
     <div
       className={`w-full max-w-lg rounded-sm border border-almost_black bg-white ${className}`}

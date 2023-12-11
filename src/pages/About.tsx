@@ -1,4 +1,4 @@
-import hero from '/hero-about-2.webp';
+import hero from '/hero-about.webp';
 
 function PageAbout() {
   return (

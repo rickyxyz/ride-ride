@@ -2,8 +2,8 @@ import { ButtonLink } from '../components/common/Button';
 import hero_desktop from '/hero-desktop-home.webp';
 import hero_mobile from '/hero-mobile-home.webp';
 import store from '/stores.webp';
-import town from '/tour-town.jpg';
-import lake from '/tour-lake.jpg';
+import town from '/tour-town.webp';
+import lake from '/tour-lake.webp';
 import CarouselBike from '../components/CarouselBike';
 
 function PageHome() {
