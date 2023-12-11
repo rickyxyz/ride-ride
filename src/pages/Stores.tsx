@@ -1,8 +1,9 @@
 import hero from '/hero-store.webp';
+import store_1 from '/store-1.jpg';
 
 function PageStores() {
   return (
-    <main className="pb-36">
+    <main className="flex flex-col items-center pb-36">
       <style>{`
     .hero_image {
       background: linear-gradient(180deg, rgb(0,0,0,0.8) 0%, rgb(0,0,0,0.6) 90%), url(${hero}) no-repeat;
@@ -28,14 +29,32 @@ function PageStores() {
         </div>
       </section>
       <section
-        className={`flex w-full flex-col items-center gap-4 bg-white p-4 pb-16 md:p-10`}
+        className={`flex w-full max-w-3xl flex-col items-center gap-4 bg-white p-4 pb-16 md:p-10`}
       >
         <h2>Locations</h2>
-        <p>
+        <p className="self-start">
           We have multiple stores across the city. Ensuring you can pickup your
           ride easily
         </p>
-        <div className="grid w-full max-w-7xl grid-cols-2"></div>
+        <div className="mt-8 flex flex-col items-start justify-start gap-12 self-start pl-4">
+          <div className="grid grid-cols-[7fr,3fr]">
+            <h3 className="before:top relative col-span-2 before:absolute before:-left-4 before:h-full before:w-1 before:bg-almost_black">
+              Station Store
+            </h3>
+            <div className="flex flex-col gap-1">
+              <p>In front of the Train Station</p>
+              <span className="flex flex-col md:flex-row">
+                Address
+                <address>Station Street No.13, Left Side, Brick</address>
+              </span>
+              <span className="flex flex-col md:flex-row">
+                Phone
+                <address>123-4567</address>
+              </span>
+            </div>
+            <img src={store_1} alt="store" className="w-50 h-auto" />
+          </div>
+        </div>
       </section>
     </main>
   );
