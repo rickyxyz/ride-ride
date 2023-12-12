@@ -1,114 +1,214 @@
+import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../components/common/Button';
-import OrderSummary from '../components/common/OrderSummary';
 import bike from '/bike-1.webp';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { useCookies } from 'react-cookie';
+import { useNavigate, useParams } from 'react-router-dom';
+import { CartItem } from '../@types/types';
+import { BICYCLE } from '../constants/Bicycles';
+
+const formSchema = z
+  .object({
+    pickupDate: z
+      .string()
+      .min(1, { message: 'Please select a date' })
+      .transform((str) => new Date(str)),
+    duration: z.string().min(1, { message: 'Please select rental duration' }),
+    pickupLocation: z
+      .string()
+      .min(1, { message: 'Please select a pickup location' }),
+  })
+  .required();
+type FormData = z.infer<typeof formSchema>;
 
 function PageBookBike() {
-  return (
-    <main className="flex grid-cols-1 justify-center bg-ghost_white pb-48 pt-12 lg:grid-cols-[7fr,3fr]">
-      <div className="grid max-w-7xl grid-cols-[3fr,7fr,1px,3fr] gap-x-2 bg-white p-8">
-        <div className="flex h-full flex-col gap-4 self-center text-center">
-          <h4 className="font-bold">The Climb</h4>
-          <img src={bike} alt="" />
-        </div>
-        <form className="grid grid-cols-2 gap-x-4 gap-y-2 px-4">
-          <div className="flex flex-col">
-            <label htmlFor="date" className="mb-2 font-bold">
-              Date
-            </label>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              className="rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2"
-            />
-            <label htmlFor="date" className="invisible">
-              error
-            </label>
+  const navigate = useNavigate();
+  const { id: bikeID } = useParams();
+  const [cookies, setCookie] = useCookies(['cart']);
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  if (!bikeID) {
+    navigate('/404');
+  } else {
+    const bikeIndex = parseInt(bikeID[1]);
+    const onSubmit: SubmitHandler<FormData> = (data) => {
+      const newData: CartItem<'bike'> = {
+        id: bikeID,
+        quantity: 1,
+        type: 'bike',
+        details: { ...data },
+      };
+
+      const existingCart: CartItem[] =
+        (cookies.cart as CartItem[] | undefined) ?? [];
+      const updatedCart = [...existingCart, newData];
+      setCookie('cart', updatedCart, { path: '/' });
+      navigate('/order');
+    };
+
+    return (
+      <main className="relative flex grid-cols-1 justify-center bg-ghost_white pb-48 pt-12 lg:grid-cols-[7fr,3fr]">
+        <form
+          className="grid max-w-7xl grid-cols-[3fr,7fr,1px,3fr] gap-x-2 bg-white p-8"
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex h-full flex-col gap-4 self-center text-center">
+            <h4 className="font-bold">The Climb</h4>
+            <img src={bike} alt="" />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="date" className="mb-2 font-bold">
-              Duration
-            </label>
-            <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
-              <select
-                name="date"
-                id="date"
-                className="w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2"
-              >
-                <option value="1">6 Hours</option>
-                <option value="1">12 Hours</option>
-                <option value="1">24 hours</option>
-                <option value="1">2 days</option>
-                <option value="1">3 days</option>
-              </select>
-            </div>
-            <label htmlFor="date" className="invisible">
-              error
-            </label>
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="date" className="mb-2 font-bold">
-              Pickup Location
-            </label>
-            <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
-              <select
-                name="date"
-                id="date"
-                className="w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2"
-              >
-                <option value="1">Here</option>
-                <option value="1">There</option>
-                <option value="1">Where</option>
-              </select>
-            </div>
-            <label htmlFor="date" className="invisible">
-              error
-            </label>
-          </div>
-          <div className="row-span-2">Map</div>
-          <div className="col-span-2 flex flex-col">
-            <label htmlFor="date" className="col-span-2 mb-2 font-bold">
-              Accessories
-            </label>
-            <div>
+          <div className="justify-content-start flex flex-col justify-start gap-x-4 gap-y-6 px-4">
+            <div className="flex flex-col">
+              <label htmlFor="pickupDate" className="mb-2 font-bold">
+                Date
+              </label>
               <input
-                type="checkbox"
-                name="date"
-                id="date"
-                className="rounded-lg border-[1px] border-almost_black px-6 py-3"
+                type="date"
+                className={`rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                  errors.pickupDate ? 'border-red-500' : ''
+                }`}
+                {...register('pickupDate')}
               />
-              <label htmlFor="">Helmet</label>
+              {errors.pickupDate && (
+                <label htmlFor="pickupDate" className="text-red-500">
+                  {errors.pickupDate.message}
+                </label>
+              )}
             </div>
-            <div>
-              <input
-                type="checkbox"
-                name="date"
-                id="date"
-                className="rounded-lg border-[1px] border-almost_black px-6 py-3"
-              />
-              <label htmlFor="">Seat pads</label>
+            <div className="flex flex-col">
+              <label htmlFor="duration" className="mb-2 font-bold">
+                Duration
+              </label>
+              <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
+                <select
+                  {...register('duration')}
+                  className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                    errors.duration ? 'border-red-500' : ''
+                  }`}
+                >
+                  <option value="" disabled selected hidden>
+                    Select Duration
+                  </option>
+                  <option value="3">3 Hours</option>
+                  <option value="6">6 Hours</option>
+                  <option value="12">12 Hours</option>
+                  <option value="24">24 hours</option>
+                </select>
+              </div>
+              {errors.duration && (
+                <label htmlFor="duration" className="text-red-500">
+                  {errors.duration.message}
+                </label>
+              )}
             </div>
-            <div>
-              <input
-                type="checkbox"
-                name="date"
-                id="date"
-                className="rounded-lg border-[1px] border-almost_black px-6 py-3"
-              />
-              <label htmlFor="">Basket</label>
+            <div className="flex flex-col">
+              <label htmlFor="pickupLocation" className="mb-2 font-bold">
+                Pickup Location
+              </label>
+              <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
+                <select
+                  {...register('pickupLocation')}
+                  className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                    errors.pickupLocation ? 'border-red-500' : ''
+                  }`}
+                >
+                  <option value="" disabled selected hidden>
+                    Select Pickup Location
+                  </option>
+                  <option value="station">Station</option>
+                  <option value="downtown">Downtown</option>
+                  <option value="park">Park</option>
+                </select>
+              </div>
+              {errors.pickupLocation && (
+                <label htmlFor="pickupLocation" className="text-red-500">
+                  {errors.pickupLocation.message}
+                </label>
+              )}
             </div>
           </div>
-          <div></div>
-          <div className="justify-self-end">
-            {/* eslint-disable-next-line no-console */}
-            <Button text="Add to order" onClick={() => console.log('a')} />
+          <div className="bg-almost_black" />
+          <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
+            <h4>Order Summary</h4>
+            <div className="flex flex-col">
+              <div className="flex flex-row rounded-md p-1 pr-3">
+                <div className="flex flex-1 flex-row gap-2">
+                  <p className="capitalize">{BICYCLE[bikeIndex].name}</p>
+                  <p>x1</p>
+                </div>
+                <div className="font-semibold">
+                  $
+                  {BICYCLE[bikeIndex].price *
+                    (parseInt(watch('duration')) || 0)}
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div className="flex flex-col">
+              <div className="flex flex-row rounded-md p-1 pr-3">
+                <div className="flex flex-1 flex-row gap-2">
+                  <p>Subtotal</p>
+                </div>
+                <div className="font-semibold">
+                  {' '}
+                  $
+                  {BICYCLE[bikeIndex].price *
+                    (parseInt(watch('duration')) || 0)}
+                </div>
+              </div>
+              <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
+                <div className="flex flex-1 flex-row gap-2">
+                  <p>Deposit</p>
+                </div>
+                <div className="font-semibold">$10</div>
+              </div>
+              <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
+                <div className="flex flex-1 flex-row gap-2">
+                  <p>Tax</p>
+                </div>
+                <div className="font-semibold">
+                  <p>
+                    $
+                    {Math.round(
+                      BICYCLE[bikeIndex].price *
+                        (parseInt(watch('duration')) || 0) *
+                        0.1
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
+              <div className="flex flex-1 flex-row gap-2 font-bold">
+                <p>Grand Total</p>
+              </div>
+              <div className="font-bold">
+                $
+                {BICYCLE[bikeIndex].price * (parseInt(watch('duration')) || 0) +
+                  Math.round(
+                    BICYCLE[bikeIndex].price *
+                      (parseInt(watch('duration')) || 0) *
+                      0.1
+                  ) +
+                  10}
+              </div>
+            </div>
+            <div className="mt-4 flex flex-row justify-end gap-4">
+              <Button type="submit" text="Book Item" className="self-end" />
+            </div>
           </div>
         </form>
-        <div className="bg-almost_black" />
-        <OrderSummary />
-      </div>
-    </main>
-  );
+      </main>
+    );
+  }
 }
 
 export default PageBookBike;

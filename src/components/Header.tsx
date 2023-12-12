@@ -4,8 +4,15 @@ import { TbShoppingCart } from 'react-icons/tb';
 import { PiCaretDown, PiCaretUp } from 'react-icons/pi';
 import { HiMiniXMark, HiBars3 } from 'react-icons/hi2';
 import '../../node_modules/flag-icons/css/flag-icons.min.css';
-import { Link, I18nLang, languagesFlag, languagesKey } from '../@types/types';
+import {
+  Link,
+  I18nLang,
+  languagesFlag,
+  languagesKey,
+  CartItem,
+} from '../@types/types';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 const headerLinks: Link[] = [
   {
@@ -150,6 +157,9 @@ function _SideBar({
 }
 
 function Header() {
+  const [cookies] = useCookies(['cart']);
+  const existingCart: CartItem[] =
+    (cookies.cart as CartItem[] | undefined) ?? [];
   const [t] = useTranslation('common');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -173,6 +183,9 @@ function Header() {
         </ul>
       </nav>
       <span className="relative ml-6 transition duration-75 before:absolute before:-left-6 before:bg-black hover:text-orange lg:before:h-full lg:before:w-0.5">
+        {existingCart.length > 0 && (
+          <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-orange" />
+        )}
         <a href="/order">
           <TbShoppingCart size={24} />
         </a>
