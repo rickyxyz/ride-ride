@@ -32,10 +32,7 @@
     "setupTests.ts",
     "postcss.config.js",
     "tailwind.config.ts",
-    "playwright.config.ts",
-    "stories",
-    "tests",
-    "src/pages/About.tsx"
+    "stories"
   ],
   "exclude": ["node_modules", "dist", "storybook-static"]
 }

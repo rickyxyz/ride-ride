@@ -33,11 +33,6 @@ module.exports = {
       files: ['./stories/**/*.stories.*'],
       extends: ['plugin:storybook/recommended'],
     },
-    // Configuration for e2e testing (Playwright)
-    {
-      files: ['./tests/e2e/**/*'],
-      extends: ['plugin:playwright/recommended'],
-    },
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
