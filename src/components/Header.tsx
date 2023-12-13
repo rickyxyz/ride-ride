@@ -12,7 +12,7 @@ import {
   CartItem,
 } from '../@types/types';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 const headerLinks: Link[] = [
   {
@@ -157,9 +157,8 @@ function _SideBar({
 }
 
 function Header() {
-  const [cookies] = useCookies(['cart']);
-  const existingCart: CartItem[] =
-    (cookies.cart as CartItem[] | undefined) ?? [];
+  const existingCart = JSON.parse(Cookies.get('cart') ?? '[]') as CartItem[];
+  const cartHasItem = existingCart.length > 0;
   const [t] = useTranslation('common');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -183,7 +182,7 @@ function Header() {
         </ul>
       </nav>
       <span className="relative ml-6 transition duration-75 before:absolute before:-left-6 before:bg-black hover:text-orange lg:before:h-full lg:before:w-0.5">
-        {existingCart.length > 0 && (
+        {cartHasItem && (
           <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-orange" />
         )}
         <a href="/order">

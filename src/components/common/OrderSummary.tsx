@@ -2,25 +2,25 @@ import { ButtonLink } from './Button';
 import { CartItem, CartItemBike } from '../../@types/types';
 import { BICYCLE } from '../../constants/Bicycles';
 import { TOUR } from '../../constants/Tours';
-import { useCookies } from 'react-cookie';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { IoIosCloseCircle } from 'react-icons/io';
+import Cookies from 'js-cookie';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
 }
 
 function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
-  // const [cookies, setCookie] = useCookies(['cart']);
-  const [cookies] = useCookies(['cart']);
-  const existingCart: CartItem[] = useMemo(
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    () => (cookies as { cart: CartItem[] }).cart || [],
-    [cookies]
-  );
+  const cart = JSON.parse(Cookies.get('cart') ?? '[]') as CartItem[];
+  const [existingCart, setExistingCart] = useState(cart);
   const subTotal = useMemo(() => {
     return existingCart.reduce((sum, item) => {
       if (item.type === 'bike') {
-        sum += BICYCLE[parseInt(item.id[1], 10)].price;
+        const duration = parseInt(
+          (item as CartItem<'bike'>).details.duration,
+          10
+        );
+        sum += BICYCLE[parseInt(item.id[1], 10)].price * duration;
       } else {
         sum += TOUR[parseInt(item.id[1], 10)].price;
       }
@@ -64,13 +64,14 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
     </div>
   );
 
-  // function removeItem(index) {
-  //   const newCookie = {
-  //     ...cookies,
-  //     cart: cookies.cart,
-  //   };
-  //   setCookie('cart');
-  // }
+  function removeItem(index: number) {
+    const newCart = [
+      ...existingCart.slice(0, index),
+      ...existingCart.slice(index + 1),
+    ];
+    setExistingCart(newCart);
+    Cookies.set('cart', JSON.stringify(newCart));
+  }
 
   const orderSummaryMini = (
     <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
@@ -125,8 +126,12 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"
                 key={`ch-${index}-${item.id}`}
               >
-                {/* eslint-disable-next-line no-console */}
-                <button onClick={() => console.log('R')}>X</button>
+                <button
+                  onClick={() => removeItem(index)}
+                  className="hover:text-red-500"
+                >
+                  <IoIosCloseCircle size={24} />
+                </button>
                 <div className="hidden h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={bike.image} alt="" className="object-cover" />
                 </div>
@@ -148,6 +153,12 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"
                 key={`ch-${index}-${item.id}`}
               >
+                <button
+                  onClick={() => removeItem(index)}
+                  className="hover:text-red-500"
+                >
+                  <IoIosCloseCircle size={24} />
+                </button>
                 <div className="hidden h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={tour.image} alt="" className="object-cover" />
                 </div>

@@ -4,12 +4,11 @@ import OrderSummary from '../components/common/OrderSummary';
 import { FaClock, FaDollarSign } from 'react-icons/fa';
 import { TOUR } from '../constants/Tours';
 import { CartItem } from '../@types/types';
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 
 function PageBookTour() {
   const navigate = useNavigate();
   const { id: tourID } = useParams();
-  const [cookies, setCookie] = useCookies(['cart']);
 
   if (!tourID) {
     navigate('/404');
@@ -28,10 +27,11 @@ function PageBookTour() {
         },
       };
 
-      const existingCart: CartItem[] =
-        (cookies.cart as CartItem[] | undefined) ?? [];
+      const existingCart = JSON.parse(
+        Cookies.get('cart') ?? '[]'
+      ) as CartItem[];
       const updatedCart = [...existingCart, newData];
-      setCookie('cart', updatedCart, { path: '/' });
+      Cookies.set('cart', JSON.stringify(updatedCart));
       navigate('/order');
     };
 
