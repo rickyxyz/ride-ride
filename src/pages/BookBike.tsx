@@ -3,10 +3,10 @@ import Button from '../components/common/Button';
 import bike from '/bike-1.webp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import Cookies from 'js-cookie';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CartItem } from '../@types/types';
 import { BICYCLE } from '../constants/Bicycles';
+import { useCartContext } from '../components/useCart';
 
 const formSchema = z
   .object({
@@ -25,7 +25,7 @@ type FormData = z.infer<typeof formSchema>;
 function PageBookBike() {
   const navigate = useNavigate();
   const { id: bikeID } = useParams();
-  const cart = JSON.parse(Cookies.get('cart') ?? '[]') as CartItem[];
+  const addToCart = useCartContext()[1];
   const {
     register,
     watch,
@@ -47,8 +47,7 @@ function PageBookBike() {
         details: { ...data },
       };
 
-      const updatedCart = [...cart, newData];
-      Cookies.set('cart', JSON.stringify(updatedCart));
+      addToCart(newData);
       navigate('/order');
     };
 

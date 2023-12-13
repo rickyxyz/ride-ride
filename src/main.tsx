@@ -15,6 +15,7 @@ import PageOrder from './pages/Order.tsx';
 import PageCheckout from './pages/Checkout.tsx';
 import PageAbout from './pages/About.tsx';
 import PageStores from './pages/Stores.tsx';
+import { CartContextProvider } from './components/useCart.tsx';
 
 const router = createBrowserRouter([
   {
@@ -59,9 +60,11 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <React.StrictMode>
     <Suspense fallback={<div>Loading...</div>}>
       <I18nextProvider i18n={i18n}>
-        <Header />
-        <RouterProvider router={router} />
-        <Footer />
+        <CartContextProvider>
+          <Header />
+          <RouterProvider router={router} />
+          <Footer />
+        </CartContextProvider>
       </I18nextProvider>
     </Suspense>
   </React.StrictMode>

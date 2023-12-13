@@ -2,19 +2,19 @@ import { ButtonLink } from './Button';
 import { CartItem, CartItemBike } from '../../@types/types';
 import { BICYCLE } from '../../constants/Bicycles';
 import { TOUR } from '../../constants/Tours';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
-import Cookies from 'js-cookie';
+import { useCartContext } from '../useCart';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
 }
 
 function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
-  const cart = JSON.parse(Cookies.get('cart') ?? '[]') as CartItem[];
-  const [existingCart, setExistingCart] = useState(cart);
+  const cart = useCartContext()[0];
+  const removeItemFromCart = useCartContext()[2];
   const subTotal = useMemo(() => {
-    return existingCart.reduce((sum, item) => {
+    return cart.reduce((sum, item) => {
       if (item.type === 'bike') {
         const duration = parseInt(
           (item as CartItem<'bike'>).details.duration,
@@ -26,18 +26,18 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
       }
       return sum;
     }, 0);
-  }, [existingCart]);
+  }, [cart]);
 
   const tax = useMemo(() => {
     return Math.round(subTotal * 0.1);
   }, [subTotal]);
 
   const total = useMemo(() => {
-    if (existingCart.some((item) => item.type === 'bike')) {
+    if (cart.some((item) => item.type === 'bike')) {
       return subTotal + tax + 10;
     }
     return subTotal + tax;
-  }, [existingCart, subTotal, tax]);
+  }, [cart, subTotal, tax]);
 
   const orderSummaryBottom = (
     <div className="flex flex-col">
@@ -53,7 +53,7 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
         </div>
         <div className="font-semibold">$10</div>
       </div>
-      {existingCart.some((item) => item.type === 'bike') && (
+      {cart.some((item) => item.type === 'bike') && (
         <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
           <div className="flex flex-1 flex-row gap-2">
             <p>Tax</p>
@@ -65,19 +65,14 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
   );
 
   function removeItem(index: number) {
-    const newCart = [
-      ...existingCart.slice(0, index),
-      ...existingCart.slice(index + 1),
-    ];
-    setExistingCart(newCart);
-    Cookies.set('cart', JSON.stringify(newCart));
+    removeItemFromCart(index);
   }
 
   const orderSummaryMini = (
     <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
       <h4>Order Summary</h4>
       <div className="flex flex-col">
-        {existingCart.map((item, index) => {
+        {cart.map((item, index) => {
           if (item.type === 'bike') {
             const bike = BICYCLE[parseInt(item.id[1], 10)];
             return (
@@ -118,7 +113,7 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
     <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-full">
       <h4 className="mb-4">Order Summary</h4>
       <div className="flex flex-col">
-        {existingCart.map((item, index) => {
+        {cart.map((item, index) => {
           if (item.type === 'bike') {
             const bike = BICYCLE[parseInt(item.id[1], 10)];
             return (

@@ -44,7 +44,7 @@ export interface CartItemTour {
   tourTime: string;
 }
 
-interface CartItemDetailMap {
+export interface CartItemDetailMap {
   bike: CartItemBike;
   tour: CartItemTour;
 }

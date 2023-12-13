@@ -4,15 +4,9 @@ import { TbShoppingCart } from 'react-icons/tb';
 import { PiCaretDown, PiCaretUp } from 'react-icons/pi';
 import { HiMiniXMark, HiBars3 } from 'react-icons/hi2';
 import '../../node_modules/flag-icons/css/flag-icons.min.css';
-import {
-  Link,
-  I18nLang,
-  languagesFlag,
-  languagesKey,
-  CartItem,
-} from '../@types/types';
+import { Link, I18nLang, languagesFlag, languagesKey } from '../@types/types';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useCartContext } from './useCart';
 
 const headerLinks: Link[] = [
   {
@@ -157,8 +151,8 @@ function _SideBar({
 }
 
 function Header() {
-  const existingCart = JSON.parse(Cookies.get('cart') ?? '[]') as CartItem[];
-  const cartHasItem = existingCart.length > 0;
+  const cart = useCartContext()[0];
+  const cartHasItem = cart.length > 0;
   const [t] = useTranslation('common');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
