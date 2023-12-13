@@ -32,3 +32,28 @@ export interface Tour {
   duration: string;
   landmarks: string[];
 }
+
+export interface CartItemBike {
+  pickupDate: Date;
+  duration: string;
+  pickupLocation: string;
+}
+
+export interface CartItemTour {
+  tourDate: string;
+  tourTime: string;
+}
+
+interface CartItemDetailMap {
+  bike: CartItemBike;
+  tour: CartItemTour;
+}
+
+export interface CartItem<
+  T extends keyof CartItemDetailMap = keyof CartItemDetailMap,
+> {
+  id: string;
+  quantity: number;
+  type: T;
+  details: CartItemDetailMap[T];
+}

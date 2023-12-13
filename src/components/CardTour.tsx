@@ -13,13 +13,13 @@ function CardTour({ tour, className }: CardTourProps) {
   const { code, name, image, price, duration, landmarks } = tour;
   return (
     <div
-      className={`w-full max-w-lg rounded-sm border border-almost_black bg-white ${className}`}
+      className={`flex w-full max-w-lg flex-col rounded-sm border border-almost_black bg-white ${className}`}
     >
       <div className="flex h-80 w-full items-center justify-center overflow-hidden">
         <img src={image} alt={name} className="object-cover" />
       </div>
-      <h2>{name}</h2>
-      <div className="flex flex-col gap-3 p-6">
+      <div className="flex flex-1 flex-col gap-5 p-4">
+        <h2 className="capitalize">{name}</h2>
         <span className="flex flex-row gap-6">
           <div className="flex flex-row items-start gap-1">
             <RiMoneyDollarCircleFill />
@@ -36,19 +36,21 @@ function CardTour({ tour, className }: CardTourProps) {
             </div>
           </div>
         </span>
-        <span>Landmarks:</span>
-        <ul className="pl-8">
-          {landmarks.map((landmark) => (
-            <li key={`tour-${landmark}`} className="list-disc">
-              {landmark}
-            </li>
-          ))}
-        </ul>
+        <div className="flex-1">
+          <span>Landmarks:</span>
+          <ul className="pl-8">
+            {landmarks.map((landmark) => (
+              <li key={`tour-${landmark}`} className="list-disc capitalize">
+                {landmark}
+              </li>
+            ))}
+          </ul>
+        </div>
         <ButtonLink
           text="Book Now"
           style="primary"
           target={`tour/${code}`}
-          className="mt-6 flex-1 self-end"
+          className="self-end"
         />
       </div>
     </div>

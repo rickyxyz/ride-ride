@@ -1,69 +1,109 @@
+import { z } from 'zod';
 import Button from '../components/common/Button';
 import OrderSummary from '../components/common/OrderSummary';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+const formSchema = z
+  .object({
+    name: z.string().min(3, { message: 'Please enter your full name' }),
+    phone: z.string().min(1, { message: 'Please enter your phone number' }),
+    email: z.string().min(1, { message: 'Please enter your email address' }),
+  })
+  .required();
+type FormData = z.infer<typeof formSchema>;
 
 function PageCheckout() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    // eslint-disable-next-line no-console
+    console.log(data);
+  };
+
   return (
     <main className="flex justify-center bg-ghost_white pb-40 pt-12">
       <div className="grid max-w-7xl grid-cols-[4fr,1px,3fr] bg-white p-6 shadow-lg">
         <div className="flex flex-col items-start justify-start gap-4 px-10">
           <h4 className="mb-2">Your Details</h4>
-          <form action="" className="flex w-full max-w-md flex-col gap-5">
+          <form
+            className="flex w-full max-w-md flex-col gap-5"
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="flex flex-1 flex-col">
               <span className="flex flex-row justify-between">
-                <label htmlFor="date" className="mb-2 font-bold">
+                <label htmlFor="name" className="mb-2 font-bold">
                   Full Name
                 </label>
-                <label htmlFor="date" className="invisible">
-                  error
-                </label>
+                {errors.name && (
+                  <label htmlFor="name" className="text-red-500">
+                    {errors.name.message}
+                  </label>
+                )}
               </span>
               <input
                 type="text"
-                name="date"
-                id="date"
-                className="border-[1px] border-almost_black px-6 py-2"
+                id="name"
+                className={`border-[1px] border-almost_black px-6 py-2 ${
+                  errors.name ? 'border-red-500' : ''
+                }`}
+                {...register('name')}
               />
             </div>
             <div className="flex flex-1 flex-col">
               <span className="flex flex-row justify-between">
-                <label htmlFor="date" className="mb-2 font-bold">
+                <label htmlFor="phone" className="mb-2 font-bold">
                   Phone Number
                 </label>
-                <label htmlFor="date" className="invisible">
-                  error
-                </label>
+                {errors.phone && (
+                  <label htmlFor="phone" className="text-red-500">
+                    {errors.phone.message}
+                  </label>
+                )}
               </span>
               <input
                 type="text"
-                name="date"
-                id="date"
-                className="border-[1px] border-almost_black px-6 py-2"
+                id="phone"
+                className={`border-[1px] border-almost_black px-6 py-2 ${
+                  errors.phone ? 'border-red-500' : ''
+                }`}
+                {...register('phone')}
               />
             </div>
             <div className="flex flex-1 flex-col">
               <span className="flex flex-row justify-between">
-                <label htmlFor="date" className="mb-2 font-bold">
+                <label htmlFor="email" className="mb-2 font-bold">
                   Email
                 </label>
-                <label htmlFor="date" className="invisible">
-                  error
-                </label>
+                {errors.email && (
+                  <label htmlFor="email" className="text-red-500">
+                    {errors.email.message}
+                  </label>
+                )}
               </span>
               <input
                 type="text"
-                name="date"
-                id="date"
-                className="border-[1px] border-almost_black px-6 py-2"
+                id="email"
+                className={`border-[1px] border-almost_black px-6 py-2 ${
+                  errors.email ? 'border-red-500' : ''
+                }`}
+                {...register('email')}
               />
             </div>
             <div className="mt-8 self-end">
-              {/* eslint-disable-next-line no-console */}
-              <Button text="Confirm Booking" onClick={() => console.log('a')} />
+              <Button text="Checkout" type="submit" />
             </div>
           </form>
         </div>
         <div className="bg-almost_black" />
-        <OrderSummary showButton={false} />
+        <OrderSummary />
       </div>
     </main>
   );

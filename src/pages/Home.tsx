@@ -19,31 +19,33 @@ function PageHome() {
 
   const heroSection = (
     <>
-      <style>{`
-  .hero_image {
-    background: linear-gradient(180deg, rgba(251,251,255,0.6) 0%, rgba(172,172,172,0.9) 100%), url(${hero_mobile}) no-repeat;
-    background-size: 100% auto;
-    background-position: top right;
-  }
-  .store_image {
-    background: white;
-    background-size: 100% auto;
-    background-position: top right;
-    background-size: cover;
-  }
-  @media screen and (min-width: 1024px){
-    .hero_image {
-      background: linear-gradient(90deg, rgba(251,251,255,0.8) 50%, rgba(0,0,0,0.3) 81%), url(${hero_desktop}) no-repeat;
-      background-position: right;
-    }
-    .store_image {
-      background: linear-gradient(180deg, rgba(251,251,255,0.2) 0%, rgba(172,172,172,0.2) 100%), url(${store}) no-repeat;
-      background-size: 100% auto;
-      background-position: top right;
-      background-size: cover;
-    }
-  }
-`}</style>
+      <style>
+        {`
+          .hero_image {
+            background: linear-gradient(180deg, rgba(251,251,255,0.6) 0%, rgba(172,172,172,0.9) 100%), url(${hero_mobile}) no-repeat;
+            background-size: 100% auto;
+            background-position: top right;
+          }
+          .store_image {
+            background: white;
+            background-size: 100% auto;
+            background-position: top right;
+            background-size: cover;
+          }
+          @media screen and (min-width: 1024px){
+            .hero_image {
+              background: linear-gradient(90deg, rgba(251,251,255,0.8) 50%, rgba(0,0,0,0.3) 81%), url(${hero_desktop}) no-repeat;
+              background-position: right;
+            }
+            .store_image {
+              background: linear-gradient(180deg, rgba(251,251,255,0.2) 0%, rgba(172,172,172,0.2) 100%), url(${store}) no-repeat;
+              background-size: 100% auto;
+              background-position: top right;
+              background-size: cover;
+            }
+          }
+      `}
+      </style>
       <section
         className={`hero_image flex h-[300px] w-full flex-col items-center bg-contain bg-no-repeat p-4 md:h-[850px] md:p-10 md:pt-[9%]`}
       >

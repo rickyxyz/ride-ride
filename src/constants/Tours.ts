@@ -5,7 +5,7 @@ import tour_bridge from '/tour-bridge.webp';
 
 const TOUR: Tour[] = [
   {
-    code: 't1',
+    code: 't0',
     image: tour_lake,
     name: 'tour of the lake',
     price: 20,
@@ -14,7 +14,7 @@ const TOUR: Tour[] = [
     landmarks: ['urban water park', 'lakeside park'],
   },
   {
-    code: 't2',
+    code: 't1',
     image: tour_town,
     name: 'tour of the town',
     price: 13,
@@ -23,7 +23,7 @@ const TOUR: Tour[] = [
     landmarks: ['pizza shop', 'old town road'],
   },
   {
-    code: 't3',
+    code: 't2',
     image: tour_bridge,
     name: 'tour of the bridge',
     price: 18,

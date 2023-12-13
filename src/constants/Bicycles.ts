@@ -5,7 +5,7 @@ import bike_3 from '/bike-3.webp';
 
 const BICYCLE: Bicycle[] = [
   {
-    code: 'b1',
+    code: 'b0',
     name: 'mountain bike',
     image: bike_1,
     description:
@@ -13,7 +13,7 @@ const BICYCLE: Bicycle[] = [
     price: 12,
   },
   {
-    code: 'b2',
+    code: 'b1',
     name: 'street bike',
     image: bike_2,
     description:
@@ -21,7 +21,7 @@ const BICYCLE: Bicycle[] = [
     price: 15,
   },
   {
-    code: 'b3',
+    code: 'b2',
     name: 'electric bike',
     image: bike_3,
     description: 'Smooth power delivery, Balanced confident handling.',
