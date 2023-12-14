@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CartItem } from '../@types/types';
-import { BICYCLE } from '../constants/Bicycles';
+import { BICYCLE_EN as BICYCLE } from '../constants/Bicycles';
 import { useCartContext } from '../components/useCart';
 
 const formSchema = z

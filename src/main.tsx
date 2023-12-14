@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import PageHome from './pages/Home.tsx';
 import Header from './components/Header.tsx';
@@ -18,46 +18,95 @@ import PageStores from './pages/Stores.tsx';
 import { CartContextProvider } from './components/useCart.tsx';
 import PageSummary from './pages/Summary.tsx';
 
+// eslint-disable-next-line react-refresh/only-export-components
+const Layout = ({ children }: { children: ReactNode }) => (
+  <>
+    <Header />
+    {children}
+    <Footer />
+  </>
+);
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <PageHome />,
+    element: (
+      <Layout>
+        <PageHome />
+      </Layout>
+    ),
   },
   {
     path: '/bike',
-    element: <PageBikes />,
+    element: (
+      <Layout>
+        <PageBikes />
+      </Layout>
+    ),
   },
   {
     path: '/bike/:id',
-    element: <PageBike />,
+    element: (
+      <Layout>
+        <PageBike />
+      </Layout>
+    ),
   },
   {
     path: '/tour',
-    element: <PageTours />,
+    element: (
+      <Layout>
+        <PageTours />
+      </Layout>
+    ),
   },
   {
     path: '/tour/:id',
-    element: <PageBookTour />,
+    element: (
+      <Layout>
+        <PageBookTour />
+      </Layout>
+    ),
   },
   {
     path: '/checkout',
-    element: <PageCheckout />,
+    element: (
+      <Layout>
+        <PageCheckout />
+      </Layout>
+    ),
   },
   {
     path: '/order',
-    element: <PageOrder />,
+    element: (
+      <Layout>
+        <PageOrder />
+      </Layout>
+    ),
   },
   {
     path: '/about',
-    element: <PageAbout />,
+    element: (
+      <Layout>
+        <PageAbout />
+      </Layout>
+    ),
   },
   {
     path: '/stores',
-    element: <PageStores />,
+    element: (
+      <Layout>
+        <PageStores />
+      </Layout>
+    ),
   },
   {
     path: '/summary',
-    element: <PageSummary />,
+    element: (
+      <Layout>
+        <PageSummary />
+      </Layout>
+    ),
   },
 ]);
 
@@ -66,9 +115,7 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
     <Suspense fallback={<div>Loading...</div>}>
       <I18nextProvider i18n={i18n}>
         <CartContextProvider>
-          <Header />
           <RouterProvider router={router} />
-          <Footer />
         </CartContextProvider>
       </I18nextProvider>
     </Suspense>

@@ -3,7 +3,7 @@ import bike_1 from '/bike-1.webp';
 import bike_2 from '/bike-2.webp';
 import bike_3 from '/bike-3.webp';
 
-const BICYCLE: Bicycle[] = [
+const BICYCLE_EN: Bicycle[] = [
   {
     code: 'b0',
     name: 'mountain bike',
@@ -29,4 +29,31 @@ const BICYCLE: Bicycle[] = [
   },
 ];
 
-export { BICYCLE };
+const BICYCLE_ID: Bicycle[] = [
+  {
+    code: 'b0',
+    name: 'Sepeda Gunung',
+    image: bike_1,
+    description:
+      'Fitur desain hardtail klasik dan karakteristik berkendara yang seimbang.',
+    price: 12,
+  },
+  {
+    code: 'b1',
+    name: 'Sepeda Balap',
+    image: bike_2,
+    description:
+      'Ringan dan lincah saat mendaki dan sangat percaya diri saat menuruni.',
+    price: 15,
+  },
+  {
+    code: 'b2',
+    name: 'Sepeda Listrik',
+    image: bike_3,
+    description:
+      'Pengiriman daya yang halus, penanganan seimbang dan percaya diri.',
+    price: 12,
+  },
+];
+
+export { BICYCLE_EN, BICYCLE_ID };

@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import { ButtonLink } from './Button';
 import { Bicycle } from '../../@types/types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface CardBikeProps {
   bike: Bicycle;
@@ -10,6 +11,7 @@ interface CardBikeProps {
 }
 
 function CardBike({ bike, size = 'full', className }: CardBikeProps) {
+  const [t] = useTranslation('common');
   const { code, name, description, image, price } = bike;
 
   const cardFull = (
@@ -19,10 +21,16 @@ function CardBike({ bike, size = 'full', className }: CardBikeProps) {
       <img src={image} alt={name} className="mb-2 h-auto w-full" />
       <div className="flex flex-1 flex-col gap-3">
         <h2 className="capitalize">{name}</h2>
-        <p className="font-bold">${price}/day</p>
+        <p className="font-bold">
+          ${price}/{t('day')}
+        </p>
         <p className="flex-1">{description}</p>
         <span className="mt-6 flex flex-col justify-end gap-2 sm:flex-row">
-          <ButtonLink text="Book Now" style="primary" target={`bike/${code}`} />
+          <ButtonLink
+            text={t('book now')}
+            style="primary"
+            target={`bike/${code}`}
+          />
         </span>
       </div>
     </div>

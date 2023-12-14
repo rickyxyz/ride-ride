@@ -1,6 +1,6 @@
 import { ButtonLink } from './Button';
 import { CartItem, CartItemBike } from '../../@types/types';
-import { BICYCLE } from '../../constants/Bicycles';
+import { BICYCLE_EN as BICYCLE } from '../../constants/Bicycles';
 import { TOUR } from '../../constants/Tours';
 import { useMemo } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';

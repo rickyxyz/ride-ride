@@ -5,8 +5,10 @@ import store from '/stores.webp';
 import town from '/tour-town.webp';
 import lake from '/tour-lake.webp';
 import CarouselBike from '../components/CarouselBike';
+import { useTranslation } from 'react-i18next';
 
 function PageHome() {
+  const [t] = useTranslation('home');
   const dividerClassBefore =
     'relative lg:before:absolute lg:before:-top-12 lg:before:left-0 lg:before:h-24 lg:before:w-full lg:before:skew-y-3 pt-12';
   const dividerClassAfter =
@@ -51,12 +53,8 @@ function PageHome() {
       >
         <div className="w-full max-w-screen-2xl">
           <div className="flex w-fit flex-col items-end gap-2">
-            <h1>
-              Explore the city
-              <br />
-              with a bike
-            </h1>
-            <p>Best prices, best bikes</p>
+            <h1>{t('hero title')}</h1>
+            <p>{t('hero subtitle')}</p>
             <ButtonLink text="Rent a bike" className="mt-6" target={'/bike'} />
           </div>
         </div>
@@ -70,14 +68,11 @@ function PageHome() {
     >
       <div className={`${contentStyle}`}>
         <div className="flex flex-col gap-2">
-          <h2 className={`${sectionHeaderStyle}`}>Bike Rental</h2>
-          <span className="text-big">Find your bike</span>
-          <p>
-            With a diverse range of models in various sizes and types, we have
-            the perfect bike for everyone.
-          </p>
+          <h2 className={`${sectionHeaderStyle}`}>{t('bike rental header')}</h2>
+          <span className="text-big">{t('bike rental title')}</span>
+          <p>{t('bike rental subtitle')}</p>
           <ButtonLink
-            text={'See all bikes'}
+            text={t('bike rental button')}
             target={'/bike'}
             className="mt-8 self-start"
           />
@@ -93,20 +88,21 @@ function PageHome() {
     >
       <div className={`${contentStyle}`}>
         <div className="flex flex-col gap-2">
-          <h2 className={`${sectionHeaderStyle}`}>Guided Tour</h2>
-          <span className="text-big">Discover new area</span>
+          <h2 className={`${sectionHeaderStyle}`}>{t('tour header')}</h2>
+          <span className="text-big">{t('tour title')}</span>
           <p>
-            Embark on an unforgettable 2-hour city tour with our expert guide,
-            exploring both iconic landmarks and hidden gems, such as:
+            {t('tour subtitle_1')}
             <ul className="my-2 ml-8 list-disc">
-              <li>The Majestic Tower</li>
-              <li>The Serene Deep Lake</li>
-              <li>The Lush Green Park</li>
+              {t('tour_points')
+                .split(',')
+                .map((item, index) => (
+                  <li key={`tour-item-${index}`}>{item}</li>
+                ))}
             </ul>
-            Experience the city&apos;s beauty like never before!
+            {t('tour subtitle_2')}
           </p>
           <ButtonLink
-            text={'See all tours'}
+            text={t('tour button')}
             target={'/tour'}
             className="mt-8 self-start"
           />
@@ -135,18 +131,11 @@ function PageHome() {
     <section className={`store_image ${sectionStyle} md:pt-32`}>
       <div className={`${contentStyle}`}>
         <div className="flex flex-col gap-2">
-          <h2 className={`${sectionHeaderStyle}`}>Our Shops</h2>
-          <span className="text-big">
-            Book online,
-            <br />
-            Pickup anywhere
-          </span>
-          <p>
-            Ready to roll? Book your bike online and grab it at any of our
-            store.
-          </p>
+          <h2 className={`${sectionHeaderStyle}`}>{t('store header')}</h2>
+          <span className="text-big">{t('store title')}</span>
+          <p>{t('store subtitle')}</p>
           <ButtonLink
-            text={'Book Now'}
+            text={t('store button')}
             target={'/bike'}
             className="mt-8 self-start"
           />

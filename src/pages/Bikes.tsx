@@ -1,8 +1,13 @@
 import CardBike from '../components/common/CardBike';
 import hero from '/hero-tours.webp';
-import { BICYCLE } from '../constants/Bicycles';
+import { BICYCLE_EN, BICYCLE_ID } from '../constants/Bicycles';
+import { useTranslation } from 'react-i18next';
 
 function PageBikes() {
+  const { i18n } = useTranslation('bikes');
+  const [t] = useTranslation('bikes');
+  const bikes = i18n.language === 'id' ? BICYCLE_ID : BICYCLE_EN;
+
   return (
     <main>
       <style>{`
@@ -24,8 +29,8 @@ function PageBikes() {
       >
         <div className="flex w-full max-w-screen-2xl md:justify-end">
           <div className="flex w-fit flex-col gap-2 text-white md:items-end">
-            <h1>Our Bikes</h1>
-            <p>Pick the right bike for you</p>
+            <h1>{t('hero title')}</h1>
+            <p>{t('hero subtitle')}</p>
           </div>
         </div>
       </section>
@@ -33,7 +38,7 @@ function PageBikes() {
         className={`flex w-full flex-col items-center bg-white p-4 pb-16 md:p-10`}
       >
         <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-x-4 gap-y-5 pb-16 pt-8 md:grid-cols-2 md:pb-32 lg:grid-cols-4">
-          {BICYCLE.map((bike) => (
+          {bikes.map((bike) => (
             <CardBike bike={bike} size="full" key={`bike-${bike.code}`} />
           ))}
         </div>

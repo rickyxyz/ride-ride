@@ -4,11 +4,17 @@ import { TbShoppingCart } from 'react-icons/tb';
 import { PiCaretDown, PiCaretUp } from 'react-icons/pi';
 import { HiMiniXMark, HiBars3 } from 'react-icons/hi2';
 import '../../node_modules/flag-icons/css/flag-icons.min.css';
-import { Link, I18nLang, languagesFlag, languagesKey } from '../@types/types';
+import {
+  Link as LinkType,
+  I18nLang,
+  languagesFlag,
+  languagesKey,
+} from '../@types/types';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useCartContext } from './useCart';
+import { Link } from 'react-router-dom';
 
-const headerLinks: Link[] = [
+const headerLinks: LinkType[] = [
   {
     name: 'home',
     i18nKey: 'home',
@@ -139,7 +145,7 @@ function _SideBar({
                 key={`header-${link.name}`}
                 className="capitalize transition duration-75 hover:text-orange"
               >
-                <a href={link.href}>{t(link.i18nKey)}</a>
+                <Link to={link.href}>{t(link.i18nKey)}</Link>
               </li>
             );
           })}
@@ -158,9 +164,9 @@ function Header() {
 
   return (
     <header className="flex h-20 max-w-full flex-row items-center justify-end gap-6 px-4 py-2 pr-6">
-      <a href="/" className=" mr-auto transition duration-75 hover:scale-105">
+      <Link to="/" className=" mr-auto transition duration-75 hover:scale-105">
         <img src={logo} className="h-10 w-auto" />
-      </a>
+      </Link>
       <nav className="hidden lg:block">
         <ul className="flex flex-row gap-6">
           {headerLinks.map((link) => {

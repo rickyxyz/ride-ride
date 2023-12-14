@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BICYCLE } from '../constants/Bicycles';
+import { BICYCLE_EN as BICYCLE } from '../constants/Bicycles';
 import CardBike from './common/CardBike';
 import { motion } from 'framer-motion';
 
