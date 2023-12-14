@@ -11,6 +11,7 @@ type CartContextValue = [
   CartItem[],
   (cartItem: CartItem) => void,
   (index: number) => void,
+  () => void,
 ];
 
 const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -44,7 +45,12 @@ export const CartContextProvider: React.FC<CartContextProps> = ({
     Cookies.set('cart', JSON.stringify(newCart));
   };
 
-  const contextValue: CartContextValue = [cart, add, remove];
+  const clear = () => {
+    setCart([]);
+    Cookies.set('cart', '[]');
+  };
+
+  const contextValue: CartContextValue = [cart, add, remove, clear];
 
   return (
     <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>

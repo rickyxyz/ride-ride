@@ -34,9 +34,9 @@ function PageBookTour() {
 
     return (
       <main className="flex justify-center bg-ghost_white pb-40 pt-12">
-        <div className="grid max-w-7xl grid-cols-[3fr,7fr,1px,3fr] bg-white p-6 shadow-lg">
+        <div className="grid max-w-7xl grid-cols-1 gap-y-8 bg-white p-6 shadow-lg lg:grid-cols-[3fr,7fr,1px,3fr]">
           <img src={tour.image} alt="" className="self-center" />
-          <div className="flex flex-col items-start justify-start gap-4 px-10">
+          <div className="flex flex-col items-start justify-start gap-4 px-0  lg:px-10">
             <h2 className="capitalize">{tour.name}</h2>
             <span className="flex flex-row gap-6">
               <div className="flex flex-row items-start gap-1">

@@ -3,6 +3,8 @@ import Button from '../components/common/Button';
 import OrderSummary from '../components/common/OrderSummary';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useCartContext } from '../components/useCart';
 
 const formSchema = z
   .object({
@@ -14,6 +16,8 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 function PageCheckout() {
+  const clearCart = useCartContext()[3];
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,8 +27,10 @@ function PageCheckout() {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    navigate('/summary', {
+      state: { customerDetails: data, checkoutDate: new Date() },
+    });
+    clearCart();
   };
 
   return (

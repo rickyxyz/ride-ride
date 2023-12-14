@@ -124,7 +124,7 @@ function _SideBar({
 
   return (
     <div
-      className={`absolute right-0 top-0 flex h-full flex-col gap-12 bg-ghost_white px-4 py-6 pr-6 ${
+      className={`absolute right-0 top-0 z-50 flex h-full flex-col gap-12 bg-ghost_white px-4 py-6 pr-6 ${
         isOpen ? 'w-52' : 'hidden'
       }`}
     >

@@ -16,6 +16,7 @@ import PageCheckout from './pages/Checkout.tsx';
 import PageAbout from './pages/About.tsx';
 import PageStores from './pages/Stores.tsx';
 import { CartContextProvider } from './components/useCart.tsx';
+import PageSummary from './pages/Summary.tsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: '/stores',
     element: <PageStores />,
+  },
+  {
+    path: '/summary',
+    element: <PageSummary />,
   },
 ]);
 

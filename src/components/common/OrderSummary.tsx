@@ -8,10 +8,12 @@ import { useCartContext } from '../useCart';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
+  editable?: boolean;
 }
 
-function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
+function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
   const cart = useCartContext()[0];
+  const isEmpty = cart.length < 1;
   const removeItemFromCart = useCartContext()[2];
   const subTotal = useMemo(() => {
     return cart.reduce((sum, item) => {
@@ -61,6 +63,19 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
           <div className="font-semibold">${tax}</div>
         </div>
       )}
+    </div>
+  );
+
+  const orderSummaryEmpty = (
+    <div className="flex w-full flex-col items-center gap-6 bg-white px-4 lg:w-full">
+      <h4>
+        Looks like your <br />
+        order is empty
+      </h4>
+      <span className="flex flex-row gap-4">
+        <ButtonLink text={'Book a bike'} target={'/bike'} />
+        <ButtonLink text={'Book a tour'} target={'/tour'} />
+      </span>
     </div>
   );
 
@@ -121,12 +136,14 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"
                 key={`ch-${index}-${item.id}`}
               >
-                <button
-                  onClick={() => removeItem(index)}
-                  className="hover:text-red-500"
-                >
-                  <IoIosCloseCircle size={24} />
-                </button>
+                {editable && (
+                  <button
+                    onClick={() => removeItem(index)}
+                    className="hover:text-red-500"
+                  >
+                    <IoIosCloseCircle size={24} />
+                  </button>
+                )}
                 <div className="hidden h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={bike.image} alt="" className="object-cover" />
                 </div>
@@ -148,12 +165,14 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"
                 key={`ch-${index}-${item.id}`}
               >
-                <button
-                  onClick={() => removeItem(index)}
-                  className="hover:text-red-500"
-                >
-                  <IoIosCloseCircle size={24} />
-                </button>
+                {editable && (
+                  <button
+                    onClick={() => removeItem(index)}
+                    className="hover:text-red-500"
+                  >
+                    <IoIosCloseCircle size={24} />
+                  </button>
+                )}
                 <div className="hidden h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={tour.image} alt="" className="object-cover" />
                 </div>
@@ -175,15 +194,15 @@ function OrderSummary({ type = 'mini' }: OrderSummaryProps) {
         </div>
         <div className="font-bold">${total}</div>
       </div>
-      <ButtonLink
-        text="Checkout Now"
-        className="self-end"
-        target={'/checkout'}
-      />
+      <ButtonLink text="Checkout" className="self-end" target={'/checkout'} />
     </div>
   );
 
-  return type === 'full' ? orderSummaryFull : orderSummaryMini;
+  return type === 'full'
+    ? isEmpty
+      ? orderSummaryEmpty
+      : orderSummaryFull
+    : orderSummaryMini;
 }
 
 export default OrderSummary;

@@ -52,9 +52,9 @@ function PageBookBike() {
     };
 
     return (
-      <main className="relative flex grid-cols-1 justify-center bg-ghost_white pb-48 pt-12 lg:grid-cols-[7fr,3fr]">
+      <main className="relative flex justify-center bg-ghost_white pb-48 pt-12">
         <form
-          className="grid max-w-7xl grid-cols-[3fr,7fr,1px,3fr] gap-x-2 bg-white p-8"
+          className="grid max-w-7xl grid-cols-1 gap-x-2 gap-y-8 bg-white p-8 lg:grid-cols-[3fr,7fr,1px,3fr]"
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit(onSubmit)}
         >
