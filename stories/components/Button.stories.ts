@@ -23,7 +23,7 @@ export const ButtonPrimary: Story = {
 export const ButtonSecondary: Story = {
   args: {
     text: 'Book a Bike',
-    style: 'secondary',
+    variant: 'secondary',
   },
 };
 
