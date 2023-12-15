@@ -8,12 +8,16 @@ import { CartItem } from '../@types/types';
 import { BICYCLE_EN as BICYCLE } from '../constants/Bicycles';
 import { useCartContext } from '../components/useCart';
 
+const today = new Date();
+const todayString = today.toISOString().split('T')[0];
+const yesterday = new Date();
+yesterday.setDate(today.getDate() - 1);
+
 const formSchema = z
   .object({
-    pickupDate: z
-      .string()
-      .min(1, { message: 'Please select a date' })
-      .transform((str) => new Date(str)),
+    pickupDate: z.coerce
+      .date()
+      .min(yesterday, { message: 'Please pick a future date' }),
     duration: z.string().min(1, { message: 'Please select rental duration' }),
     pickupLocation: z
       .string()
@@ -72,6 +76,7 @@ function PageBookBike() {
                 className={`rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
                   errors.pickupDate ? 'border-red-500' : ''
                 }`}
+                min={todayString}
                 {...register('pickupDate')}
               />
               {errors.pickupDate && (
