@@ -1,4 +1,5 @@
 import { AnchorHTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -43,17 +44,17 @@ function ButtonLink({
   attributes,
 }: ButtonLink) {
   return (
-    <a
+    <Link
       className={`${className} ${
         style === 'primary'
           ? 'border-orange bg-orange text-white hover:shadow-md hover:brightness-110'
           : 'border-black bg-black text-white hover:bg-white hover:text-black'
       } text-p flex h-11 min-w-[120px] items-center justify-center rounded-lg border-2 px-4 py-2 font-bold transition duration-100`}
-      href={target}
+      to={target}
       {...attributes}
     >
       {text}
-    </a>
+    </Link>
   );
 }
 

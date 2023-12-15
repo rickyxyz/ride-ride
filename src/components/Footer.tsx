@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from '../@types/types';
+import { Link as LinkType } from '../@types/types';
 import logo from '/logo-light.svg';
 import { IoMail } from 'react-icons/io5';
 import { FaPhone } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const footerLinks: Link[] = [
+const footerLinks: LinkType[] = [
   {
     name: 'home',
     i18nKey: 'home',
@@ -42,20 +43,20 @@ function Footer() {
       className={`relative flex w-full flex-col items-start justify-center bg-almost_black px-8 pb-4 pt-32 font-light text-ghost_white md:items-center ${separatorStyle}`}
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.5fr,8fr,8fr]">
-        <a href="/">
+        <Link to="/">
           <img src={logo} alt="ride ride logo" className="h-auto w-20" />
-        </a>
+        </Link>
         <section className="flex flex-col gap-6">
           <h4>RideRide.com</h4>
           <div className="grid grid-cols-[1fr,12fr] items-center gap-1">
             <IoMail />
-            <a href="" className="text-orange underline">
+            <Link to="" className="text-orange underline">
               book@rideride.com
-            </a>
+            </Link>
             <FaPhone />
-            <a href="" className="text-orange underline">
+            <Link to="" className="text-orange underline">
               (121) 987-6781
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col gap-1">
             <span className="font-bold">Hours</span>
@@ -74,7 +75,7 @@ function Footer() {
                   key={`header-${link.name}`}
                   className="capitalize transition duration-75 hover:text-orange"
                 >
-                  <a href={link.href}>{t(link.i18nKey)}</a>
+                  <Link to={link.href}>{t(link.i18nKey)}</Link>
                 </li>
               );
             })}
@@ -83,14 +84,14 @@ function Footer() {
       </div>
       <div className="mt-24 text-sm font-extralight text-ghost_white">
         Design inspired by{' '}
-        <a
-          href="https://bikerent.nyc/"
+        <Link
+          to="https://bikerent.nyc/"
           rel="noreferrer noopener"
           target="_blank"
           className="text-sm"
         >
           bikerent.nyc
-        </a>
+        </Link>
       </div>
     </footer>
   );

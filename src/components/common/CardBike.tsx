@@ -29,7 +29,7 @@ function CardBike({ bike, size = 'full', className }: CardBikeProps) {
           <ButtonLink
             text={t('book now')}
             style="primary"
-            target={`bike/${code}`}
+            target={`/bike/${code}`}
           />
         </span>
       </div>

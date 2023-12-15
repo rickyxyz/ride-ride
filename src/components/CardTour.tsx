@@ -49,7 +49,7 @@ function CardTour({ tour, className }: CardTourProps) {
         <ButtonLink
           text="Book Now"
           style="primary"
-          target={`tour/${code}`}
+          target={`/tour/${code}`}
           className="self-end"
         />
       </div>

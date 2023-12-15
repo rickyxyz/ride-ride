@@ -175,7 +175,7 @@ function Header() {
                 key={`header-${link.name}`}
                 className="capitalize transition duration-75 hover:text-orange"
               >
-                <a href={link.href}>{t(link.i18nKey)}</a>
+                <Link to={link.href}>{t(link.i18nKey)}</Link>
               </li>
             );
           })}
@@ -185,9 +185,9 @@ function Header() {
         {cartHasItem && (
           <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-orange" />
         )}
-        <a href="/order">
+        <Link to="/order">
           <TbShoppingCart size={24} />
-        </a>
+        </Link>
       </span>
       <_LanguageSwitcher className="hidden lg:block" />
       <button
