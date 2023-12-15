@@ -3,6 +3,7 @@ import { ButtonLink } from './common/Button';
 import { FaClock } from 'react-icons/fa';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { Tour } from '../@types/types';
+import { useTranslation } from 'react-i18next';
 
 interface CardTourProps {
   tour: Tour;
@@ -11,6 +12,8 @@ interface CardTourProps {
 
 function CardTour({ tour, className }: CardTourProps) {
   const { code, name, image, price, duration, landmarks } = tour;
+  const [t] = useTranslation('common');
+
   return (
     <div
       className={`flex w-full max-w-lg flex-col rounded-sm border border-almost_black bg-white ${className}`}
@@ -47,7 +50,7 @@ function CardTour({ tour, className }: CardTourProps) {
           </ul>
         </div>
         <ButtonLink
-          text="Book Now"
+          text={t('book now')}
           style="primary"
           target={`/tour/${code}`}
           className="self-end"

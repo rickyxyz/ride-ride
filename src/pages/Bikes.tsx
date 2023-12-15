@@ -1,12 +1,11 @@
 import CardBike from '../components/common/CardBike';
 import hero from '/hero-tours.webp';
-import { BICYCLE_EN, BICYCLE_ID } from '../constants/Bicycles';
 import { useTranslation } from 'react-i18next';
+import useBikes from '../components/useBikes';
 
 function PageBikes() {
-  const { i18n } = useTranslation('bikes');
   const [t] = useTranslation('bikes');
-  const bikes = i18n.language === 'id' ? BICYCLE_ID : BICYCLE_EN;
+  const bikes = useBikes();
 
   return (
     <main>

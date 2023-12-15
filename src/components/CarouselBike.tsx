@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { BICYCLE_EN as BICYCLE } from '../constants/Bicycles';
 import CardBike from './common/CardBike';
 import { motion } from 'framer-motion';
+import useBikes from './useBikes';
 
 function CarouselBike() {
-  const bikes = BICYCLE;
+  const bikes = useBikes();
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2]);
 
   const handleNext = () => {

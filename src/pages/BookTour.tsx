@@ -2,11 +2,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../components/common/Button';
 import OrderSummary from '../components/common/OrderSummary';
 import { FaClock, FaDollarSign } from 'react-icons/fa';
-import { TOUR } from '../constants/Tours';
 import { CartItem } from '../@types/types';
 import { useCartContext } from '../components/useCart';
+import useTours from '../components/useTours';
 
 function PageBookTour() {
+  const tours = useTours();
   const navigate = useNavigate();
   const { id: tourID } = useParams();
   const addToCart = useCartContext()[1];
@@ -15,7 +16,7 @@ function PageBookTour() {
     navigate('/404');
   } else {
     const tourIndex = parseInt(tourID[1]);
-    const tour = TOUR[tourIndex];
+    const tour = tours[tourIndex];
 
     const handleBook = () => {
       const newData: CartItem<'tour'> = {

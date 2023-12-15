@@ -1,8 +1,10 @@
 import CardTour from '../components/CardTour';
-import { TOUR } from '../constants/Tours';
+import useTours from '../components/useTours';
 import hero from '/hero-tour.webp';
 
 function PageTours() {
+  const tours = useTours();
+
   return (
     <main className="mb-12 md:mb-24">
       <style>{`
@@ -36,7 +38,7 @@ function PageTours() {
         className={`flex w-full flex-col items-center bg-white p-4 pb-16 md:p-10`}
       >
         <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-6 pt-8 md:grid-cols-2 lg:grid-cols-3">
-          {TOUR.map((tour) => (
+          {tours.map((tour) => (
             <CardTour key={`tour-${tour.code}`} tour={tour} />
           ))}
         </div>

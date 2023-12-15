@@ -1,10 +1,10 @@
 import { ButtonLink } from './Button';
 import { CartItem, CartItemBike } from '../../@types/types';
-import { BICYCLE_EN as BICYCLE } from '../../constants/Bicycles';
-import { TOUR } from '../../constants/Tours';
 import { useMemo } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { useCartContext } from '../useCart';
+import useBikes from '../useBikes';
+import useTours from '../useTours';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
@@ -12,6 +12,9 @@ interface OrderSummaryProps {
 }
 
 function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
+  const bikes = useBikes();
+  const tours = useTours();
+
   const cart = useCartContext()[0];
   const isEmpty = cart.length < 1;
   const removeItemFromCart = useCartContext()[2];
@@ -22,13 +25,13 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
           (item as CartItem<'bike'>).details.duration,
           10
         );
-        sum += BICYCLE[parseInt(item.id[1], 10)].price * duration;
+        sum += bikes[parseInt(item.id[1], 10)].price * duration;
       } else {
-        sum += TOUR[parseInt(item.id[1], 10)].price;
+        sum += tours[parseInt(item.id[1], 10)].price;
       }
       return sum;
     }, 0);
-  }, [cart]);
+  }, [bikes, cart, tours]);
 
   const tax = useMemo(() => {
     return Math.round(subTotal * 0.1);
@@ -89,7 +92,7 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
       <div className="flex flex-col">
         {cart.map((item, index) => {
           if (item.type === 'bike') {
-            const bike = BICYCLE[parseInt(item.id[1], 10)];
+            const bike = bikes[parseInt(item.id[1], 10)];
             return (
               <div key={index} className="flex flex-row rounded-md p-1 pr-3">
                 <div className="flex flex-1 flex-row gap-2">
@@ -100,7 +103,7 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
               </div>
             );
           } else {
-            const tour = TOUR[parseInt(item.id[1], 10)];
+            const tour = tours[parseInt(item.id[1], 10)];
             return (
               <div key={index} className="flex flex-row rounded-md p-1 pr-3">
                 <div className="flex flex-1 flex-row gap-2">
@@ -130,7 +133,7 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
       <div className="flex flex-col">
         {cart.map((item, index) => {
           if (item.type === 'bike') {
-            const bike = BICYCLE[parseInt(item.id[1], 10)];
+            const bike = bikes[parseInt(item.id[1], 10)];
             return (
               <div
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"
@@ -159,7 +162,7 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
               </div>
             );
           } else {
-            const tour = TOUR[parseInt(item.id[1], 10)];
+            const tour = tours[parseInt(item.id[1], 10)];
             return (
               <div
                 className="flex flex-row gap-4 rounded-md p-1 pr-3"

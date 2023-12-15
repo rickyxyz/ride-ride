@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CartItem } from '../@types/types';
-import { BICYCLE_EN as BICYCLE } from '../constants/Bicycles';
 import { useCartContext } from '../components/useCart';
+import useBikes from '../components/useBikes';
 
 const today = new Date();
 const todayString = today.toISOString().split('T')[0];
@@ -38,6 +38,7 @@ function PageBookBike() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
+  const bikes = useBikes();
 
   if (!bikeID) {
     navigate('/404');
@@ -143,13 +144,11 @@ function PageBookBike() {
             <div className="flex flex-col">
               <div className="flex flex-row rounded-md p-1 pr-3">
                 <div className="flex flex-1 flex-row gap-2">
-                  <p className="capitalize">{BICYCLE[bikeIndex].name}</p>
+                  <p className="capitalize">{bikes[bikeIndex].name}</p>
                   <p>x1</p>
                 </div>
                 <div className="font-semibold">
-                  $
-                  {BICYCLE[bikeIndex].price *
-                    (parseInt(watch('duration')) || 0)}
+                  ${bikes[bikeIndex].price * (parseInt(watch('duration')) || 0)}
                 </div>
               </div>
             </div>
@@ -161,9 +160,7 @@ function PageBookBike() {
                 </div>
                 <div className="font-semibold">
                   {' '}
-                  $
-                  {BICYCLE[bikeIndex].price *
-                    (parseInt(watch('duration')) || 0)}
+                  ${bikes[bikeIndex].price * (parseInt(watch('duration')) || 0)}
                 </div>
               </div>
               <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
@@ -180,7 +177,7 @@ function PageBookBike() {
                   <p>
                     $
                     {Math.round(
-                      BICYCLE[bikeIndex].price *
+                      bikes[bikeIndex].price *
                         (parseInt(watch('duration')) || 0) *
                         0.1
                     )}
@@ -194,9 +191,9 @@ function PageBookBike() {
               </div>
               <div className="font-bold">
                 $
-                {BICYCLE[bikeIndex].price * (parseInt(watch('duration')) || 0) +
+                {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) +
                   Math.round(
-                    BICYCLE[bikeIndex].price *
+                    bikes[bikeIndex].price *
                       (parseInt(watch('duration')) || 0) *
                       0.1
                   ) +
