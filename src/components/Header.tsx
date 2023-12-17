@@ -1,4 +1,4 @@
-import logo from '/logo-light.svg';
+import logo from '/logo.svg';
 import { useTranslation } from 'react-i18next';
 import { TbShoppingCart } from 'react-icons/tb';
 import { PiCaretDown, PiCaretUp } from 'react-icons/pi';

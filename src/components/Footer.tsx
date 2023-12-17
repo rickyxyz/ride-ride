@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link as LinkType } from '../@types/types';
-import logo from '/logo-light.svg';
+import logo from '/logo.svg';
 import { IoMail } from 'react-icons/io5';
 import { FaPhone } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
