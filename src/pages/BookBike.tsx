@@ -142,15 +142,37 @@ function PageBookBike() {
           <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
             <h4>Order Summary</h4>
             <div className="flex flex-col">
-              <div className="flex flex-row rounded-md p-1 pr-3">
-                <div className="flex flex-1 flex-row gap-2">
-                  <p className="capitalize">{bikes[bikeIndex].name}</p>
-                  <p>x1</p>
+              {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
+                0 && (
+                <div className="flex w-full flex-col">
+                  <div className="flex flex-row rounded-md p-1 pr-3">
+                    <div className="flex flex-1 flex-row gap-2">
+                      <p className="capitalize">{bikes[bikeIndex].name}</p>
+                    </div>
+                    <div className="font-semibold">
+                      $
+                      {bikes[bikeIndex].price *
+                        (parseInt(watch('duration')) || 0)}
+                    </div>
+                  </div>
+                  <span className="pl-4">
+                    <p className="text-sm text-almost_black">
+                      Pickup:{' '}
+                      {watch('pickupDate')
+                        .toString()
+                        .split('-')
+                        .reverse()
+                        .join('/')}
+                    </p>
+                    <p className="text-sm capitalize text-almost_black">
+                      location: {watch('pickupLocation')}
+                    </p>
+                    <p className="text-sm text-almost_black">
+                      Duration: {parseInt(watch('duration'))} hours
+                    </p>
+                  </span>
                 </div>
-                <div className="font-semibold">
-                  ${bikes[bikeIndex].price * (parseInt(watch('duration')) || 0)}
-                </div>
-              </div>
+              )}
             </div>
             <hr />
             <div className="flex flex-col">
@@ -159,16 +181,18 @@ function PageBookBike() {
                   <p>Subtotal</p>
                 </div>
                 <div className="font-semibold">
-                  {' '}
                   ${bikes[bikeIndex].price * (parseInt(watch('duration')) || 0)}
                 </div>
               </div>
-              <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
-                <div className="flex flex-1 flex-row gap-2">
-                  <p>Deposit</p>
+              {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
+                0 && (
+                <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
+                  <div className="flex flex-1 flex-row gap-2">
+                    <p>Deposit</p>
+                  </div>
+                  <div className="font-semibold">$10</div>
                 </div>
-                <div className="font-semibold">$10</div>
-              </div>
+              )}
               <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
                 <div className="flex flex-1 flex-row gap-2">
                   <p>Tax</p>
@@ -197,7 +221,10 @@ function PageBookBike() {
                       (parseInt(watch('duration')) || 0) *
                       0.1
                   ) +
-                  10}
+                  bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
+                0
+                  ? 10
+                  : 0}
               </div>
             </div>
             <div className="mt-4 flex flex-row justify-end gap-4">
