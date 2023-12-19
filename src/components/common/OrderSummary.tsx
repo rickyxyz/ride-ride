@@ -3,7 +3,7 @@ import { CartItem, CartItemBike } from '../../@types/types';
 import { useMemo } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { useCartContext } from '../useCart';
-import useBikes from '../useBikes';
+import { useBikes } from '../useBikes';
 import useTours from '../useTours';
 import { Timestamp } from 'firebase/firestore';
 
@@ -27,6 +27,7 @@ function OrderSummary({
   const isEmpty = cart.length < 1;
   const removeItemFromCart = useCartContext()[2];
   const subTotal = useMemo(() => {
+    if (bikes.length < 1 || tours.length < 1) return 0;
     return cart.reduce((sum, item) => {
       if (item.type === 'bike') {
         const duration = parseInt(
@@ -105,6 +106,7 @@ function OrderSummary({
       <h4>Order Summary</h4>
       <div className="flex flex-col">
         {cart.map((item, index) => {
+          if (bikes.length < 1) return 'Loading...';
           if (item.type === 'bike') {
             const bike = bikes[parseInt(item.id[1], 10)];
             return (
@@ -118,6 +120,7 @@ function OrderSummary({
               </div>
             );
           } else {
+            if (tours.length < 1) return 'Loading...';
             const tour = tours[parseInt(item.id[1], 10)];
             return (
               <div key={index} className="flex flex-row rounded-md p-1 pr-3">
@@ -145,6 +148,7 @@ function OrderSummary({
       <div className="flex flex-col gap-1">
         {cart.map((item, index) => {
           if (item.type === 'bike') {
+            if (bikes.length < 1) return 'Loading...';
             const bike = bikes[parseInt(item.id[1], 10)];
             return (
               <div
@@ -159,7 +163,7 @@ function OrderSummary({
                     <IoIosCloseCircle size={24} />
                   </button>
                 )}
-                <div className="h-20 w-24 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
+                <div className="hidden h-20 w-24 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={bike.image} alt="" className="object-cover" />
                 </div>
                 <div className="flex w-full flex-col">
@@ -204,6 +208,7 @@ function OrderSummary({
               </div>
             );
           } else {
+            if (tours.length < 1) return 'Loading...';
             const tour = tours[parseInt(item.id[1], 10)];
             return (
               <div
@@ -218,7 +223,7 @@ function OrderSummary({
                     <IoIosCloseCircle size={24} />
                   </button>
                 )}
-                <div className="h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
+                <div className="hidden h-20 w-20 items-center overflow-hidden rounded-md border-[1px] border-gray md:flex">
                   <img src={tour.image} alt="" className="object-cover" />
                 </div>
                 <p className="flex-1 font-semibold capitalize">{tour.name}</p>

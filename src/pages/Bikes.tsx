@@ -1,7 +1,7 @@
 import CardBike from '../components/common/CardBike';
 import hero from '/hero-tours.webp';
 import { useTranslation } from 'react-i18next';
-import useBikes from '../components/useBikes';
+import { useBikes } from '../components/useBikes';
 
 function PageBikes() {
   const [t] = useTranslation('bikes');
@@ -37,8 +37,8 @@ function PageBikes() {
         className={`flex w-full flex-col items-center bg-white p-4 pb-16 md:p-10`}
       >
         <div className="align-center grid w-full max-w-screen-2xl grid-cols-1 justify-items-center gap-x-4 gap-y-5 pb-16 pt-8 md:grid-cols-2 md:pb-32 lg:grid-cols-4">
-          {bikes.map((bike) => (
-            <CardBike bike={bike} size="full" key={`bike-${bike.code}`} />
+          {bikes.map((bike, index) => (
+            <CardBike bike={bike} size="full" key={`bike-${index}`} />
           ))}
         </div>
       </section>

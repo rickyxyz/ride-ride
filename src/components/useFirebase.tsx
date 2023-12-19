@@ -6,8 +6,10 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
 } from 'firebase/firestore';
-import { CartItem } from '../@types/types';
+import { Bicycle, CartItem } from '../@types/types';
+import { I18nLang } from '../@types/types';
 
 const FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
 const FIREBASE_AUTH_DOMAIN = import.meta.env.VITE_FIREBASE_AUTH_DOMAIN;
@@ -58,6 +60,24 @@ export async function getOrder(orderId: string) {
 
   if (docSnap.exists()) {
     return docSnap.data();
+  } else {
+    return null;
+  }
+}
+
+export async function getBikes(locale: I18nLang) {
+  const snapshot = await getDocs(collection(db, `bike_${locale}`));
+  const bikes = snapshot.docs.map((doc) => doc.data());
+
+  return bikes as Bicycle[];
+}
+
+export async function getBike(locale: I18nLang, bikeId: string) {
+  const docRef = doc(db, `bike_${locale}`, bikeId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data() as Bicycle;
   } else {
     return null;
   }

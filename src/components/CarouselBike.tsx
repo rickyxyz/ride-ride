@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardBike from './common/CardBike';
 import { motion } from 'framer-motion';
-import useBikes from './useBikes';
+import { useBikes } from './useBikes';
 
 function CarouselBike() {
   const bikes = useBikes();

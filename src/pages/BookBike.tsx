@@ -1,12 +1,11 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../components/common/Button';
-import bike from '/bike-1.webp';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CartItem } from '../@types/types';
 import { useCartContext } from '../components/useCart';
-import useBikes from '../components/useBikes';
+import { useBike } from '../components/useBikes';
 
 const today = new Date();
 const todayString = today.toISOString().split('T')[0];
@@ -38,12 +37,11 @@ function PageBookBike() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
-  const bikes = useBikes();
+  const bike = useBike(bikeID ?? '');
 
   if (!bikeID) {
-    navigate('/404');
+    navigate('/');
   } else {
-    const bikeIndex = parseInt(bikeID[1]);
     const onSubmit: SubmitHandler<FormData> = (data) => {
       const newData: CartItem<'bike'> = {
         id: bikeID,
@@ -58,180 +56,176 @@ function PageBookBike() {
 
     return (
       <main className="relative flex justify-center bg-ghost_white pb-48 pt-12">
-        <form
-          className="grid max-w-7xl grid-cols-1 gap-x-2 gap-y-8 bg-white p-8 lg:grid-cols-[3fr,7fr,1px,3fr]"
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="flex h-full flex-col gap-4 self-center text-center">
-            <h4 className="font-bold">The Climb</h4>
-            <img src={bike} alt="" />
-          </div>
-          <div className="justify-content-start flex flex-col justify-start gap-x-4 gap-y-6 px-4">
-            <div className="flex flex-col">
-              <label htmlFor="pickupDate" className="mb-2 font-bold">
-                Date
-              </label>
-              <input
-                type="date"
-                className={`rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
-                  errors.pickupDate ? 'border-red-500' : ''
-                }`}
-                min={todayString}
-                {...register('pickupDate')}
-              />
-              {errors.pickupDate && (
-                <label htmlFor="pickupDate" className="text-red-500">
-                  {errors.pickupDate.message}
-                </label>
-              )}
+        {!bike ? (
+          'Loading...'
+        ) : (
+          <form
+            className="grid max-w-7xl grid-cols-1 gap-x-2 gap-y-8 bg-white p-8 lg:grid-cols-[3fr,7fr,1px,3fr]"
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="flex h-full flex-col gap-4 self-center text-center">
+              <h4 className="font-bold">The Climb</h4>
+              <img src={bike.image} alt="" />
             </div>
-            <div className="flex flex-col">
-              <label htmlFor="duration" className="mb-2 font-bold">
-                Duration
-              </label>
-              <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
-                <select
-                  {...register('duration')}
-                  className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
-                    errors.duration ? 'border-red-500' : ''
+            <div className="justify-content-start flex flex-col justify-start gap-x-4 gap-y-6 px-4">
+              <div className="flex flex-col">
+                <label htmlFor="pickupDate" className="mb-2 font-bold">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  className={`rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                    errors.pickupDate ? 'border-red-500' : ''
                   }`}
-                >
-                  <option value="" disabled selected hidden>
-                    Select Duration
-                  </option>
-                  <option value="3">3 Hours</option>
-                  <option value="6">6 Hours</option>
-                  <option value="12">12 Hours</option>
-                  <option value="24">24 hours</option>
-                </select>
+                  min={todayString}
+                  {...register('pickupDate')}
+                />
+                {errors.pickupDate && (
+                  <label htmlFor="pickupDate" className="text-red-500">
+                    {errors.pickupDate.message}
+                  </label>
+                )}
               </div>
-              {errors.duration && (
-                <label htmlFor="duration" className="text-red-500">
-                  {errors.duration.message}
+              <div className="flex flex-col">
+                <label htmlFor="duration" className="mb-2 font-bold">
+                  Duration
                 </label>
-              )}
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="pickupLocation" className="mb-2 font-bold">
-                Pickup Location
-              </label>
-              <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
-                <select
-                  {...register('pickupLocation')}
-                  className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
-                    errors.pickupLocation ? 'border-red-500' : ''
-                  }`}
-                >
-                  <option value="" disabled selected hidden>
-                    Select Pickup Location
-                  </option>
-                  <option value="station">Station</option>
-                  <option value="downtown">Downtown</option>
-                  <option value="park">Park</option>
-                </select>
+                <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
+                  <select
+                    {...register('duration')}
+                    className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                      errors.duration ? 'border-red-500' : ''
+                    }`}
+                  >
+                    <option value="" disabled selected hidden>
+                      Select Duration
+                    </option>
+                    <option value="3">3 Hours</option>
+                    <option value="6">6 Hours</option>
+                    <option value="12">12 Hours</option>
+                    <option value="24">24 hours</option>
+                  </select>
+                </div>
+                {errors.duration && (
+                  <label htmlFor="duration" className="text-red-500">
+                    {errors.duration.message}
+                  </label>
+                )}
               </div>
-              {errors.pickupLocation && (
-                <label htmlFor="pickupLocation" className="text-red-500">
-                  {errors.pickupLocation.message}
+              <div className="flex flex-col">
+                <label htmlFor="pickupLocation" className="mb-2 font-bold">
+                  Pickup Location
                 </label>
-              )}
+                <div className="relative after:absolute after:right-0 after:top-1/2 after:h-10 after:w-10 after:-translate-y-[33%] after:content-['▼']">
+                  <select
+                    {...register('pickupLocation')}
+                    className={`w-full rounded-l-full rounded-r-full border-[1px] border-almost_black px-6 py-2 ${
+                      errors.pickupLocation ? 'border-red-500' : ''
+                    }`}
+                  >
+                    <option value="" disabled selected hidden>
+                      Select Pickup Location
+                    </option>
+                    <option value="station">Station</option>
+                    <option value="downtown">Downtown</option>
+                    <option value="park">Park</option>
+                  </select>
+                </div>
+                {errors.pickupLocation && (
+                  <label htmlFor="pickupLocation" className="text-red-500">
+                    {errors.pickupLocation.message}
+                  </label>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="bg-almost_black" />
-          <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
-            <h4>Order Summary</h4>
-            <div className="flex flex-col">
-              {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
-                0 && (
-                <div className="flex w-full flex-col">
-                  <div className="flex flex-row rounded-md p-1 pr-3">
-                    <div className="flex flex-1 flex-row gap-2">
-                      <p className="capitalize">{bikes[bikeIndex].name}</p>
+            <div className="bg-almost_black" />
+            <div className="flex w-full flex-col gap-6 bg-white px-4 lg:w-96">
+              <h4>Order Summary</h4>
+              <div className="flex flex-col">
+                {bike.price * (parseInt(watch('duration')) || 0) > 0 && (
+                  <div className="flex w-full flex-col">
+                    <div className="flex flex-row rounded-md p-1 pr-3">
+                      <div className="flex flex-1 flex-row gap-2">
+                        <p className="capitalize">{bike.name}</p>
+                      </div>
+                      <div className="font-semibold">
+                        ${bike.price * (parseInt(watch('duration')) || 0)}
+                      </div>
                     </div>
-                    <div className="font-semibold">
-                      $
-                      {bikes[bikeIndex].price *
-                        (parseInt(watch('duration')) || 0)}
-                    </div>
+                    <span className="pl-4">
+                      <p className="text-sm text-almost_black">
+                        Pickup:{' '}
+                        {watch('pickupDate')
+                          .toString()
+                          .split('-')
+                          .reverse()
+                          .join('/')}
+                      </p>
+                      <p className="text-sm capitalize text-almost_black">
+                        location: {watch('pickupLocation')}
+                      </p>
+                      <p className="text-sm text-almost_black">
+                        Duration: {parseInt(watch('duration'))} hours
+                      </p>
+                    </span>
                   </div>
-                  <span className="pl-4">
-                    <p className="text-sm text-almost_black">
-                      Pickup:{' '}
-                      {watch('pickupDate')
-                        .toString()
-                        .split('-')
-                        .reverse()
-                        .join('/')}
-                    </p>
-                    <p className="text-sm capitalize text-almost_black">
-                      location: {watch('pickupLocation')}
-                    </p>
-                    <p className="text-sm text-almost_black">
-                      Duration: {parseInt(watch('duration'))} hours
-                    </p>
-                  </span>
-                </div>
-              )}
-            </div>
-            <hr />
-            <div className="flex flex-col">
-              <div className="flex flex-row rounded-md p-1 pr-3">
-                <div className="flex flex-1 flex-row gap-2">
-                  <p>Subtotal</p>
-                </div>
-                <div className="font-semibold">
-                  ${bikes[bikeIndex].price * (parseInt(watch('duration')) || 0)}
-                </div>
+                )}
               </div>
-              {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
-                0 && (
+              <hr />
+              <div className="flex flex-col">
+                <div className="flex flex-row rounded-md p-1 pr-3">
+                  <div className="flex flex-1 flex-row gap-2">
+                    <p>Subtotal</p>
+                  </div>
+                  <div className="font-semibold">
+                    ${bike.price * (parseInt(watch('duration')) || 0)}
+                  </div>
+                </div>
+                {bike.price * (parseInt(watch('duration')) || 0) > 0 && (
+                  <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
+                    <div className="flex flex-1 flex-row gap-2">
+                      <p>Deposit</p>
+                    </div>
+                    <div className="font-semibold">$10</div>
+                  </div>
+                )}
                 <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
                   <div className="flex flex-1 flex-row gap-2">
-                    <p>Deposit</p>
+                    <p>Tax</p>
                   </div>
-                  <div className="font-semibold">$10</div>
+                  <div className="font-semibold">
+                    <p>
+                      $
+                      {Math.round(
+                        bike.price * (parseInt(watch('duration')) || 0) * 0.1
+                      )}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
               <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
-                <div className="flex flex-1 flex-row gap-2">
-                  <p>Tax</p>
+                <div className="flex flex-1 flex-row gap-2 font-bold">
+                  <p>Grand Total</p>
                 </div>
-                <div className="font-semibold">
-                  <p>
-                    $
-                    {Math.round(
-                      bikes[bikeIndex].price *
-                        (parseInt(watch('duration')) || 0) *
-                        0.1
-                    )}
-                  </p>
+                <div className="font-bold">
+                  $
+                  {bike.price * (parseInt(watch('duration')) || 0) +
+                    Math.round(
+                      bike.price * (parseInt(watch('duration')) || 0) * 0.1
+                    ) +
+                    bike.price * (parseInt(watch('duration')) || 0) >
+                  0
+                    ? 10
+                    : 0}
                 </div>
               </div>
-            </div>
-            <div className="flex flex-row gap-2 rounded-md p-1 pr-3">
-              <div className="flex flex-1 flex-row gap-2 font-bold">
-                <p>Grand Total</p>
-              </div>
-              <div className="font-bold">
-                $
-                {bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) +
-                  Math.round(
-                    bikes[bikeIndex].price *
-                      (parseInt(watch('duration')) || 0) *
-                      0.1
-                  ) +
-                  bikes[bikeIndex].price * (parseInt(watch('duration')) || 0) >
-                0
-                  ? 10
-                  : 0}
+              <div className="mt-4 flex flex-row justify-end gap-4">
+                <Button type="submit" text="Book Item" className="self-end" />
               </div>
             </div>
-            <div className="mt-4 flex flex-row justify-end gap-4">
-              <Button type="submit" text="Book Item" className="self-end" />
-            </div>
-          </div>
-        </form>
+          </form>
+        )}
       </main>
     );
   }

@@ -1,15 +1,50 @@
 import { useTranslation } from 'react-i18next';
-import { BICYCLE_ID, BICYCLE_EN } from '../constants/Bicycles';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Bicycle, I18nLang } from '../@types/types';
+import { getBike, getBikes } from './useFirebase';
 
-const useBikes = () => {
+export const useBikes = () => {
   const { i18n } = useTranslation('common');
-  const bikes = useMemo(
-    () => (i18n.language === 'id' ? BICYCLE_ID : BICYCLE_EN),
-    [i18n.language]
-  );
+  const [bikes, setBikes] = useState<Bicycle[]>([]);
+
+  const fetchData = useCallback(async () => {
+    return getBikes(i18n.language as I18nLang)
+      .then((data) => {
+        setBikes(data);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  }, [i18n.language]);
+
+  useEffect(() => {
+    fetchData().catch((e) => {
+      throw e;
+    });
+  }, [fetchData]);
 
   return bikes;
 };
 
-export default useBikes;
+export const useBike = (id: string) => {
+  const { i18n } = useTranslation('common');
+  const [bike, setBike] = useState<Bicycle | null>();
+
+  const fetchData = useCallback(async () => {
+    return getBike(i18n.language as I18nLang, id)
+      .then((data) => {
+        setBike(data);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  }, [i18n.language, id]);
+
+  useEffect(() => {
+    fetchData().catch((e) => {
+      throw e;
+    });
+  }, [fetchData]);
+
+  return bike;
+};
