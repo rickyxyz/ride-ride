@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../components/useCart';
+import { insertOrder } from '../components/useFirebase';
 
 const formSchema = z
   .object({
@@ -17,6 +18,7 @@ type FormData = z.infer<typeof formSchema>;
 
 function PageCheckout() {
   const clearCart = useCartContext()[3];
+  const cart = useCartContext()[0];
   const navigate = useNavigate();
   const {
     register,
@@ -26,10 +28,9 @@ function PageCheckout() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    navigate('/summary', {
-      state: { customerDetails: data, checkoutDate: new Date() },
-    });
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await insertOrder(data, cart);
+    navigate('/summary');
     clearCart();
   };
 

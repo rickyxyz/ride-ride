@@ -101,7 +101,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/summary',
+    path: '/summary/:id',
     element: (
       <Layout>
         <PageSummary />

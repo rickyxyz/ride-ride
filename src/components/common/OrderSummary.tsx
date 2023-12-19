@@ -5,17 +5,25 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { useCartContext } from '../useCart';
 import useBikes from '../useBikes';
 import useTours from '../useTours';
+import { Timestamp } from 'firebase/firestore';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
   editable?: boolean;
+  data?: CartItem[];
 }
 
-function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
+function OrderSummary({
+  type = 'mini',
+  editable = true,
+  data,
+}: OrderSummaryProps) {
   const bikes = useBikes();
   const tours = useTours();
 
-  const cart = useCartContext()[0];
+  const cartCookie = useCartContext()[0];
+  const cart = data ?? cartCookie;
+
   const isEmpty = cart.length < 1;
   const removeItemFromCart = useCartContext()[2];
   const subTotal = useMemo(() => {
@@ -159,9 +167,26 @@ function OrderSummary({ type = 'mini', editable = true }: OrderSummaryProps) {
                   <span className="pl-4">
                     <p className="text-sm text-almost_black">
                       Pickup:{' '}
-                      {(
-                        item.details as CartItemBike
-                      ).pickupDate.toLocaleDateString('en-GB')}
+                      {data
+                        ? (
+                            (item.details as CartItemBike)
+                              .pickupDate as unknown as Timestamp
+                          )
+                            .toDate()
+                            .toLocaleString('en-GB', {
+                              weekday: 'long',
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                            })
+                        : (
+                            item.details as CartItemBike
+                          ).pickupDate.toLocaleString('en-GB', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
                     </p>
                     <p className="text-sm capitalize text-almost_black">
                       location: {(item.details as CartItemBike).pickupLocation}
