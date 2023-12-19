@@ -29,8 +29,8 @@ function PageCheckout() {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    await insertOrder(data, cart);
-    navigate('/summary');
+    const hash = await insertOrder(data, cart);
+    navigate(`/summary/${hash as string}`);
     clearCart();
   };
 

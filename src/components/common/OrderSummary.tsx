@@ -5,7 +5,6 @@ import { IoIosCloseCircle } from 'react-icons/io';
 import { useCartContext } from '../useCart';
 import { useBikes } from '../useBikes';
 import { useTours } from '../useTours';
-import { Timestamp } from 'firebase/firestore';
 
 interface OrderSummaryProps {
   type?: 'mini' | 'full';
@@ -171,26 +170,14 @@ function OrderSummary({
                   <span className="pl-4">
                     <p className="text-sm text-almost_black">
                       Pickup:{' '}
-                      {data
-                        ? (
-                            (item.details as CartItemBike)
-                              .pickupDate as unknown as Timestamp
-                          )
-                            .toDate()
-                            .toLocaleString('en-GB', {
-                              weekday: 'long',
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            })
-                        : (
-                            item.details as CartItemBike
-                          ).pickupDate.toLocaleString('en-GB', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
+                      {new Date(
+                        (item.details as CartItemBike).pickupDate
+                      ).toLocaleString('en-GB', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
                     </p>
                     <p className="text-sm capitalize text-almost_black">
                       location: {(item.details as CartItemBike).pickupLocation}
@@ -241,7 +228,9 @@ function OrderSummary({
         </div>
         <div className="font-bold">${total}</div>
       </div>
-      <ButtonLink text="Checkout" className="self-end" target={'/checkout'} />
+      {editable && (
+        <ButtonLink text="Checkout" className="self-end" target={'/checkout'} />
+      )}
     </div>
   );
 
