@@ -1,5 +1,5 @@
 import CardTour from '../components/CardTour';
-import useTours from '../components/useTours';
+import { useTours } from '../components/useTours';
 import hero from '/hero-tour.webp';
 
 function PageTours() {

@@ -1,15 +1,50 @@
 import { useTranslation } from 'react-i18next';
-import { TOUR_ID, TOUR_EN } from '../constants/Tours';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Tour, I18nLang } from '../@types/types';
+import { getTour, getTours } from './useFirebase';
 
-const useTours = () => {
+export const useTours = () => {
   const { i18n } = useTranslation('common');
-  const tours = useMemo(
-    () => (i18n.language === 'id' ? TOUR_ID : TOUR_EN),
-    [i18n.language]
-  );
+  const [tours, setTours] = useState<Tour[]>([]);
+
+  const fetchData = useCallback(async () => {
+    return getTours(i18n.language as I18nLang)
+      .then((data) => {
+        setTours(data);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  }, [i18n.language]);
+
+  useEffect(() => {
+    fetchData().catch((e) => {
+      throw e;
+    });
+  }, [fetchData]);
 
   return tours;
 };
 
-export default useTours;
+export const useTour = (id: string) => {
+  const { i18n } = useTranslation('common');
+  const [tour, setTour] = useState<Tour | null>();
+
+  const fetchData = useCallback(async () => {
+    return getTour(i18n.language as I18nLang, id)
+      .then((data) => {
+        setTour(data);
+      })
+      .catch((e) => {
+        throw e;
+      });
+  }, [i18n.language, id]);
+
+  useEffect(() => {
+    fetchData().catch((e) => {
+      throw e;
+    });
+  }, [fetchData]);
+
+  return tour;
+};

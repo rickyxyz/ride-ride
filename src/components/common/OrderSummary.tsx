@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { useCartContext } from '../useCart';
 import { useBikes } from '../useBikes';
-import useTours from '../useTours';
+import { useTours } from '../useTours';
 import { Timestamp } from 'firebase/firestore';
 
 interface OrderSummaryProps {

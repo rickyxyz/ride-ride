@@ -8,7 +8,7 @@ import {
   getDoc,
   getDocs,
 } from 'firebase/firestore';
-import { Bicycle, CartItem } from '../@types/types';
+import { Bicycle, CartItem, Tour } from '../@types/types';
 import { I18nLang } from '../@types/types';
 
 const FIREBASE_API_KEY = import.meta.env.VITE_FIREBASE_API_KEY;
@@ -78,6 +78,24 @@ export async function getBike(locale: I18nLang, bikeId: string) {
 
   if (docSnap.exists()) {
     return docSnap.data() as Bicycle;
+  } else {
+    return null;
+  }
+}
+
+export async function getTours(locale: I18nLang) {
+  const snapshot = await getDocs(collection(db, `tour_${locale}`));
+  const bikes = snapshot.docs.map((doc) => doc.data());
+
+  return bikes as Tour[];
+}
+
+export async function getTour(locale: I18nLang, tourId: string) {
+  const docRef = doc(db, `tour_${locale}`, tourId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data() as Tour;
   } else {
     return null;
   }
