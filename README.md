@@ -13,15 +13,16 @@ Made with
 
 ## About
 
-This is a toy project for learning how to use Storybook, React.Js, and i18next.
-The website is about a fictional bicycle rental shop that offers bikes and tours across the city.
+A demo website designed for a bicycle rental business. Equipped
+with multi-language support and connection to Firebase for data
+retrieval and form submission.
 
 ## Learning Points
 
 What I learned from this project:
 
 - Create the design first (or create at least the smaller reusable components like input and select field)
-- Plan the business process first, so the form isn't a mess
+- Flesh out the business process first
 
 ## Screenshot
 
